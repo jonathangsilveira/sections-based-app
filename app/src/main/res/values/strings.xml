@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Sections App</string>
+    <string name="cover_content_description">Essa imagem pode representar a capa do álbum, playlist ou foto de perfil do artista</string>
+</resources>
