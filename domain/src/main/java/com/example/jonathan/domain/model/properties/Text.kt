@@ -1,4 +1,4 @@
-package com.example.jonathan.sectionsapp.model.properties
+package com.example.jonathan.domain.model.properties
 
 data class Text(
     val value: String,

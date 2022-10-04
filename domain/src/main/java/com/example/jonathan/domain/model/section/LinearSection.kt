@@ -1,7 +1,7 @@
-package com.example.jonathan.sectionsapp.model.section
+package com.example.jonathan.domain.model.section
 
-import com.example.jonathan.sectionsapp.model.item.SectionItem
-import com.example.jonathan.sectionsapp.model.properties.Header
+import com.example.jonathan.domain.model.item.SectionItem
+import com.example.jonathan.domain.model.properties.Header
 
 data class LinearSection(
     override val id: Int,
