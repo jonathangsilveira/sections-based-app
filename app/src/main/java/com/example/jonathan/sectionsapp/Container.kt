@@ -7,4 +7,5 @@ interface Container {
     fun removeAt(position: Int)
     fun clear()
     fun isEmpty(): Boolean
+    fun contains(item: Item): Boolean
 }

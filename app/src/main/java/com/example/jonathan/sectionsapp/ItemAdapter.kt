@@ -59,4 +59,6 @@ class ItemAdapter : RecyclerView.Adapter<ItemViewHolder>(), Container {
     }
 
     override fun isEmpty(): Boolean = this.items.isEmpty()
+
+    override fun contains(item: Item): Boolean = this.items.contains(item)
 }
