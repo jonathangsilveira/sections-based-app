@@ -1,10 +1,12 @@
 package com.example.jonathan.sectionsapp
 
+import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 
-interface Item<VH : ItemViewHolder> {
+interface Item {
     @LayoutRes fun viewType(): Int
-    fun createViewHolder(parent: ViewGroup): VH
-    fun bind(holder: VH, position: Int)
+    fun createViewHolder(parent: ViewGroup): ItemViewHolder
+    fun inflateLayout(parent: ViewGroup): View
+    fun bind(itemView: View, position: Int)
 }
