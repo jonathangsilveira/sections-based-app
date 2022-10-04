@@ -1,13 +1,13 @@
-package com.example.jonathan.sectionsapp
+package com.example.jonathan.component
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.viewbinding.ViewBinding
 
-abstract class BindingItem<VB : ViewBinding> : Item {
-    override fun createViewHolder(parent: ViewGroup): ItemViewHolder {
-        return ItemViewHolder(inflateLayout(parent))
+abstract class BindingUIComponent<VB : ViewBinding> : UIComponent {
+    override fun createViewHolder(parent: ViewGroup): UIComponentViewHolder {
+        return UIComponentViewHolder(inflateLayout(parent))
     }
 
     override fun inflateLayout(parent: ViewGroup): View {

@@ -1,17 +1,17 @@
-package com.example.jonathan.sectionsapp
+package com.example.jonathan.component
 
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 
-class ItemAdapter : RecyclerView.Adapter<ItemViewHolder>(), Container {
-    private val items: MutableList<Item> = mutableListOf()
+class UIComponentAdapter : RecyclerView.Adapter<UIComponentViewHolder>(), Container {
+    private val items: MutableList<UIComponent> = mutableListOf()
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UIComponentViewHolder {
         val item = getItemOrThrow(viewType)
         return item.createViewHolder(parent)
     }
 
-    override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: UIComponentViewHolder, position: Int) {
         val item = items[position]
         holder.bind(item, position)
     }
@@ -22,27 +22,27 @@ class ItemAdapter : RecyclerView.Adapter<ItemViewHolder>(), Container {
         return items[position].viewType()
     }
 
-    fun update(items: List<Item>) {
+    fun update(items: List<UIComponent>) {
         clear()
         addAll(items)
     }
 
-    private fun getItemOrThrow(viewType: Int): Item {
+    private fun getItemOrThrow(viewType: Int): UIComponent {
         return items.find { it.viewType() == viewType } ?: throw NotImplementedError()
     }
 
-    override fun add(item: Item) {
+    override fun add(item: UIComponent) {
         this.items.add(item)
         notifyItemInserted(this.items.lastIndex)
     }
 
-    override fun addAll(items: List<Item>) {
+    override fun addAll(items: List<UIComponent>) {
         this.items.addAll(items)
         val insertedCount = itemCount
         notifyItemRangeInserted(0, insertedCount)
     }
 
-    override fun remove(item: Item) {
+    override fun remove(item: UIComponent) {
         val position = this.items.indexOf(item)
         removeAt(position)
     }
@@ -60,5 +60,5 @@ class ItemAdapter : RecyclerView.Adapter<ItemViewHolder>(), Container {
 
     override fun isEmpty(): Boolean = this.items.isEmpty()
 
-    override fun contains(item: Item): Boolean = this.items.contains(item)
+    override fun contains(item: UIComponent): Boolean = this.items.contains(item)
 }

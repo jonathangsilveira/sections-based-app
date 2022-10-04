@@ -1,21 +1,21 @@
-package com.example.jonathan.sectionsapp
+package com.example.jonathan.component
 
 import androidx.viewbinding.ViewBinding
 
-abstract class ContainerItem<VB : ViewBinding> : BindingItem<VB>(), Container {
-    private var placeholder: Item? = null
-    protected var adapter: ItemAdapter = ItemAdapter()
+abstract class ContainerUIComponent<VB : ViewBinding> : BindingUIComponent<VB>(), Container {
+    private var placeholder: UIComponent? = null
+    protected var adapter: UIComponentAdapter = UIComponentAdapter()
         private set
 
-    override fun add(item: Item) {
+    override fun add(item: UIComponent) {
         this.adapter.add(item)
     }
 
-    override fun addAll(items: List<Item>) {
+    override fun addAll(items: List<UIComponent>) {
         this.adapter.addAll(items)
     }
 
-    override fun remove(item: Item) {
+    override fun remove(item: UIComponent) {
         this.adapter.remove(item)
         updateEmptyState()
     }
@@ -34,14 +34,14 @@ abstract class ContainerItem<VB : ViewBinding> : BindingItem<VB>(), Container {
         return this.adapter.isEmpty()
     }
 
-    override fun contains(item: Item): Boolean = this.adapter.contains(item)
+    override fun contains(item: UIComponent): Boolean = this.adapter.contains(item)
 
-    fun setPlaceholder(placeholder: Item) {
+    fun setPlaceholder(placeholder: UIComponent) {
         this.placeholder = placeholder
     }
 
-    fun newAdapter(): ItemAdapter {
-        val newInstance = ItemAdapter()
+    fun newAdapter(): UIComponentAdapter {
+        val newInstance = UIComponentAdapter()
         this.adapter = newInstance
         return newInstance
     }
