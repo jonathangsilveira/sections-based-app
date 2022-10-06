@@ -1,6 +1,7 @@
-package com.example.jonathan.sectionsapp
+package com.example.jonathan.sectionsapp.component
 
 import android.view.View
+import com.example.jonathan.sectionsapp.R
 import com.example.jonathan.sectionsapp.databinding.HeaderItemBinding
 
 class HeaderComponent(private val title: String) : com.example.jonathan.component.BindingViewHolderComponent<HeaderItemBinding>() {

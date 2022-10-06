@@ -1,8 +1,9 @@
-package com.example.jonathan.sectionsapp
+package com.example.jonathan.sectionsapp.component
 
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.jonathan.sectionsapp.R
 import com.example.jonathan.sectionsapp.databinding.CarouselItemBinding
 
 class CarouselComponent(

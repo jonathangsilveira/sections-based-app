@@ -1,7 +1,8 @@
-package com.example.jonathan.sectionsapp
+package com.example.jonathan.sectionsapp.component
 
 import android.view.View
 import androidx.core.view.isVisible
+import com.example.jonathan.sectionsapp.R
 import com.example.jonathan.sectionsapp.databinding.PlaylistItemBinding
 
 class PlaylistComponent(
