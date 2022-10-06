@@ -3,7 +3,7 @@ package com.example.jonathan.sectionsapp
 import android.view.View
 import com.example.jonathan.sectionsapp.databinding.HeaderItemBinding
 
-class HeaderUIComponent(private val title: String) : com.example.jonathan.component.BindingUIComponent<HeaderItemBinding>() {
+class HeaderComponent(private val title: String) : com.example.jonathan.component.BindingViewHolderComponent<HeaderItemBinding>() {
     override fun initViewBinding(itemView: View): HeaderItemBinding {
         return HeaderItemBinding.bind(itemView)
     }

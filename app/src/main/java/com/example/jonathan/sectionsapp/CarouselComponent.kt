@@ -5,9 +5,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.jonathan.sectionsapp.databinding.CarouselItemBinding
 
-class CarouselUIComponent(
-    private val items: List<com.example.jonathan.component.UIComponent>
-): com.example.jonathan.component.ContainerUIComponent<CarouselItemBinding>() {
+class CarouselComponent(
+    private val items: List<com.example.jonathan.component.ViewHolderComponent>
+): com.example.jonathan.component.ContainerViewHolderComponent<CarouselItemBinding>() {
     override fun initViewBinding(itemView: View): CarouselItemBinding {
         return CarouselItemBinding.bind(itemView)
     }

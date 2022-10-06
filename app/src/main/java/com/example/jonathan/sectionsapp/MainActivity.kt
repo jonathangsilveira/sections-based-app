@@ -3,10 +3,6 @@ package com.example.jonathan.sectionsapp
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
-import com.example.jonathan.domain.model.properties.Cover
-import com.example.jonathan.domain.model.properties.Shape
-import com.example.jonathan.domain.model.properties.SizeType
-import com.example.jonathan.domain.model.properties.Text
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -14,9 +10,9 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val providedItems = provideGrid()
-        val sectionItem = GridUIComponent()
+        val sectionItem = GridComponent()
         val sectionItems = providedItems.mapIndexed { position, item ->
-            PlaylistUIComponent(
+            PlaylistComponent(
                 playlistItem = item,
                 onClick = {
                     println("Playlist ${item.title.value} clicked at position $position")
@@ -25,25 +21,25 @@ class MainActivity : AppCompatActivity() {
             )
         }
         sectionItem.addAll(sectionItems)
-        sectionItem.setPlaceholder(MessageUIComponent("Ops! Your section is empty ?;)"))
+        sectionItem.setPlaceholder(MessageComponent("Ops! Your section is empty ?;)"))
         val recyclerView = findViewById<RecyclerView>(R.id.items)
-        val UIComponentAdapter = com.example.jonathan.component.UIComponentAdapter()
+        val UIComponentAdapter = com.example.jonathan.component.ViewHolderComponentAdapter()
         UIComponentAdapter.update(
             listOf(
-                BannerUIComponent(
+                BannerComponent(
                     title = "Playlists",
                     onClick = { println("Banner clicked") }
                 ),
                 sectionItem,
-                HeaderUIComponent("Made For Jonathan Giorgi Silveira"),
+                HeaderComponent("Made For Jonathan Giorgi Silveira"),
                 provideCarousel(),
-                BannerUIComponent(
+                BannerComponent(
                     title = "Another Banner",
                     onClick = { println("Banner clicked") }
                 ),
                 provideCarousel(),
-                HeaderUIComponent("Other sections"),
-                BannerUIComponent(
+                HeaderComponent("Other sections"),
+                BannerComponent(
                     title = "Final Banner",
                     onClick = { println("Banner clicked") }
                 )
@@ -75,10 +71,10 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun provideCarousel(): CarouselUIComponent {
-        return CarouselUIComponent(
+    private fun provideCarousel(): CarouselComponent {
+        return CarouselComponent(
             items = List(8) {
-                AlbumUIComponent(
+                AlbumComponent(
                     title = "Album #${it}",
                     subtitle = "Artist #${it}"
                 )

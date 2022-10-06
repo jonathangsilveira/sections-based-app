@@ -3,9 +3,9 @@ package com.example.jonathan.sectionsapp
 import android.view.View
 import com.example.jonathan.sectionsapp.databinding.GridItemBinding
 
-class GridUIComponent(
-    items: List<com.example.jonathan.component.UIComponent>? = null
-): com.example.jonathan.component.ContainerUIComponent<GridItemBinding>() {
+class GridComponent(
+    items: List<com.example.jonathan.component.ViewHolderComponent>? = null
+): com.example.jonathan.component.ContainerViewHolderComponent<GridItemBinding>() {
 
     init {
         if (!items.isNullOrEmpty())

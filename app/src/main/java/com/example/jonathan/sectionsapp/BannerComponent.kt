@@ -3,10 +3,10 @@ package com.example.jonathan.sectionsapp
 import android.view.View
 import com.example.jonathan.sectionsapp.databinding.BannerItemBinding
 
-class BannerUIComponent(
+class BannerComponent(
     private val title: String,
     private val onClick: () -> Unit
-) : com.example.jonathan.component.BindingUIComponent<BannerItemBinding>() {
+) : com.example.jonathan.component.BindingViewHolderComponent<BannerItemBinding>() {
     override fun initViewBinding(itemView: View): BannerItemBinding {
         return BannerItemBinding.bind(itemView)
     }

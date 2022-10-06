@@ -3,10 +3,10 @@ package com.example.jonathan.sectionsapp
 import android.view.View
 import com.example.jonathan.sectionsapp.databinding.AlbumItemBinding
 
-class AlbumUIComponent(
+class AlbumComponent(
     private val title: String,
     private val subtitle: String?
-) : com.example.jonathan.component.BindingUIComponent<AlbumItemBinding>() {
+) : com.example.jonathan.component.BindingViewHolderComponent<AlbumItemBinding>() {
     override fun initViewBinding(itemView: View): AlbumItemBinding {
         return AlbumItemBinding.bind(itemView)
     }

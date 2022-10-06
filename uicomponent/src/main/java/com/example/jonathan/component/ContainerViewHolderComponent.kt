@@ -2,21 +2,22 @@ package com.example.jonathan.component
 
 import androidx.viewbinding.ViewBinding
 
-abstract class ContainerUIComponent<VB : ViewBinding> : BindingUIComponent<VB>(), Container {
-    private var placeholder: UIComponent? = null
-    protected var adapter: UIComponentAdapter = UIComponentAdapter()
+abstract class ContainerViewHolderComponent<VB : ViewBinding> : BindingViewHolderComponent<VB>(),
+    Container {
+    private var placeholder: ViewHolderComponent? = null
+    protected var adapter: ViewHolderComponentAdapter = ViewHolderComponentAdapter()
         private set
 
-    override fun add(item: UIComponent) {
-        this.adapter.add(item)
+    override fun add(component: ViewHolderComponent) {
+        this.adapter.add(component)
     }
 
-    override fun addAll(items: List<UIComponent>) {
-        this.adapter.addAll(items)
+    override fun addAll(components: List<ViewHolderComponent>) {
+        this.adapter.addAll(components)
     }
 
-    override fun remove(item: UIComponent) {
-        this.adapter.remove(item)
+    override fun remove(component: ViewHolderComponent) {
+        this.adapter.remove(component)
         updateEmptyState()
     }
 
@@ -34,14 +35,15 @@ abstract class ContainerUIComponent<VB : ViewBinding> : BindingUIComponent<VB>()
         return this.adapter.isEmpty()
     }
 
-    override fun contains(item: UIComponent): Boolean = this.adapter.contains(item)
+    override fun contains(component: ViewHolderComponent): Boolean =
+        this.adapter.contains(component)
 
-    fun setPlaceholder(placeholder: UIComponent) {
+    fun setPlaceholder(placeholder: ViewHolderComponent) {
         this.placeholder = placeholder
     }
 
-    fun newAdapter(): UIComponentAdapter {
-        val newInstance = UIComponentAdapter()
+    fun newAdapter(): ViewHolderComponentAdapter {
+        val newInstance = ViewHolderComponentAdapter()
         this.adapter = newInstance
         return newInstance
     }

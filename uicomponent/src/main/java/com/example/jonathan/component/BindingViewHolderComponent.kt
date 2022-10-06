@@ -5,9 +5,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.viewbinding.ViewBinding
 
-abstract class BindingUIComponent<VB : ViewBinding> : UIComponent {
-    override fun createViewHolder(parent: ViewGroup): UIComponentViewHolder {
-        return UIComponentViewHolder(inflateLayout(parent))
+abstract class BindingViewHolderComponent<VB : ViewBinding> : ViewHolderComponent {
+    override fun createViewHolder(parent: ViewGroup): ComponentViewHolder {
+        return ComponentViewHolder(inflateLayout(parent))
     }
 
     override fun inflateLayout(parent: ViewGroup): View {

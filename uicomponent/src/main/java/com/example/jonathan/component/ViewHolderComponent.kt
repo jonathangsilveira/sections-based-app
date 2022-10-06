@@ -4,9 +4,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 
-interface UIComponent {
+interface ViewHolderComponent {
     @LayoutRes fun viewType(): Int
-    fun createViewHolder(parent: ViewGroup): UIComponentViewHolder
+    fun createViewHolder(parent: ViewGroup): ComponentViewHolder
     fun inflateLayout(parent: ViewGroup): View
     fun bind(itemView: View, position: Int)
 }

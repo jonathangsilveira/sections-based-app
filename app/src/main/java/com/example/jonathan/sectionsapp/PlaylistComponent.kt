@@ -3,12 +3,11 @@ package com.example.jonathan.sectionsapp
 import android.view.View
 import androidx.core.view.isVisible
 import com.example.jonathan.sectionsapp.databinding.PlaylistItemBinding
-import com.example.jonathan.domain.model.item.PlaylistItem
 
-class PlaylistUIComponent(
+class PlaylistComponent(
     private val playlistItem: com.example.jonathan.domain.model.item.PlaylistItem,
-    private val onClick: (UIComponent: com.example.jonathan.component.UIComponent) -> Unit
-) : com.example.jonathan.component.BindingUIComponent<PlaylistItemBinding>() {
+    private val onClick: (ViewHolderComponent: com.example.jonathan.component.ViewHolderComponent) -> Unit
+) : com.example.jonathan.component.BindingViewHolderComponent<PlaylistItemBinding>() {
     override fun initViewBinding(itemView: View): PlaylistItemBinding {
         return PlaylistItemBinding.bind(itemView)
     }
@@ -17,7 +16,7 @@ class PlaylistUIComponent(
         with(binding) {
             playlistItemTitleText.text = playlistItem.title.value
             playlistItemRecentImage.isVisible = playlistItem.isRecentPlayed
-            root.setOnClickListener { onClick(this@PlaylistUIComponent) }
+            root.setOnClickListener { onClick(this@PlaylistComponent) }
         }
     }
 

@@ -1,11 +1,11 @@
 package com.example.jonathan.component
 
 interface Container {
-    fun add(item: UIComponent)
-    fun addAll(items: List<UIComponent>)
-    fun remove(item: UIComponent)
+    fun add(component: ViewHolderComponent)
+    fun addAll(components: List<ViewHolderComponent>)
+    fun remove(component: ViewHolderComponent)
     fun removeAt(position: Int)
     fun clear()
     fun isEmpty(): Boolean
-    fun contains(item: UIComponent): Boolean
+    fun contains(component: ViewHolderComponent): Boolean
 }

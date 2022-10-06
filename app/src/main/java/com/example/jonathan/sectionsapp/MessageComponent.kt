@@ -3,9 +3,9 @@ package com.example.jonathan.sectionsapp
 import android.view.View
 import com.example.jonathan.sectionsapp.databinding.MessageItemBinding
 
-class MessageUIComponent(
+class MessageComponent(
     private val message: String
-): com.example.jonathan.component.BindingUIComponent<MessageItemBinding>() {
+): com.example.jonathan.component.BindingViewHolderComponent<MessageItemBinding>() {
     override fun initViewBinding(itemView: View): MessageItemBinding {
         return MessageItemBinding.bind(itemView)
     }
