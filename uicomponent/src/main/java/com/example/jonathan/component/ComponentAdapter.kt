@@ -3,7 +3,7 @@ package com.example.jonathan.component
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 
-class ViewHolderComponentAdapter : RecyclerView.Adapter<ComponentViewHolder>(), Container {
+class ComponentAdapter : RecyclerView.Adapter<ComponentViewHolder>(), Container {
     private val items: MutableList<ViewHolderComponent> = mutableListOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ComponentViewHolder {

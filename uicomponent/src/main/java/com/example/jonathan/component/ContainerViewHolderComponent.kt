@@ -5,7 +5,7 @@ import androidx.viewbinding.ViewBinding
 abstract class ContainerViewHolderComponent<VB : ViewBinding> : BindingViewHolderComponent<VB>(),
     Container {
     private var placeholder: ViewHolderComponent? = null
-    protected var adapter: ViewHolderComponentAdapter = ViewHolderComponentAdapter()
+    protected var adapter: ComponentAdapter = ComponentAdapter()
         private set
 
     override fun add(component: ViewHolderComponent) {
@@ -42,8 +42,8 @@ abstract class ContainerViewHolderComponent<VB : ViewBinding> : BindingViewHolde
         this.placeholder = placeholder
     }
 
-    fun newAdapter(): ViewHolderComponentAdapter {
-        val newInstance = ViewHolderComponentAdapter()
+    fun newAdapter(): ComponentAdapter {
+        val newInstance = ComponentAdapter()
         this.adapter = newInstance
         return newInstance
     }

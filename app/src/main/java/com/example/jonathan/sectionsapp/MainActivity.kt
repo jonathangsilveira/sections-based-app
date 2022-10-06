@@ -3,6 +3,8 @@ package com.example.jonathan.sectionsapp
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
+import com.example.jonathan.component.ComponentAdapter
+import com.example.jonathan.sectionsapp.component.*
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -23,8 +25,8 @@ class MainActivity : AppCompatActivity() {
         sectionItem.addAll(sectionItems)
         sectionItem.setPlaceholder(MessageComponent("Ops! Your section is empty ?;)"))
         val recyclerView = findViewById<RecyclerView>(R.id.items)
-        val UIComponentAdapter = com.example.jonathan.component.ViewHolderComponentAdapter()
-        UIComponentAdapter.update(
+        val componentAdapter = ComponentAdapter()
+        componentAdapter.update(
             listOf(
                 BannerComponent(
                     title = "Playlists",
@@ -45,7 +47,7 @@ class MainActivity : AppCompatActivity() {
                 )
             )
         )
-        recyclerView.adapter = UIComponentAdapter
+        recyclerView.adapter = componentAdapter
     }
 
     private fun provideGrid(): List<com.example.jonathan.domain.model.item.PlaylistItem> {
