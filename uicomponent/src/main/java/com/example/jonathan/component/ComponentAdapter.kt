@@ -22,11 +22,6 @@ class ComponentAdapter : RecyclerView.Adapter<ComponentViewHolder>(), Container 
         return items[position].viewType()
     }
 
-    fun update(items: List<ViewHolderComponent>) {
-        clear()
-        addAll(items)
-    }
-
     private fun getItemOrThrow(viewType: Int): ViewHolderComponent {
         return items.find { it.viewType() == viewType } ?: throw NotImplementedError()
     }
