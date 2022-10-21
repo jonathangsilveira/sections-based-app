@@ -3,7 +3,12 @@ package com.example.jonathan.sectionsapp
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
-import com.example.jonathan.component.ComponentAdapter
+import com.example.jonathan.component.ComponentListAdapter
+import com.example.jonathan.component.ViewHolderComponent
+import com.example.jonathan.domain.model.item.ShortcutItem
+import com.example.jonathan.domain.model.properties.Cover
+import com.example.jonathan.domain.model.properties.SizeType
+import com.example.jonathan.domain.model.section.GridSection
 import com.example.jonathan.sectionsapp.component.*
 
 class MainActivity : AppCompatActivity() {
@@ -12,22 +17,35 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val providedItems = provideGrid()
-        val sectionItem = GridComponent()
+        val sectionItem = GridComponent(
+            item = GridSection(
+                id = 0,
+                header = null,
+                columnsCount = 2,
+                items = providedItems
+            ),
+            itemDecorator = GridItemDecorator(
+                top = R.dimen.no_margin,
+                bottom = R.dimen.margin_02,
+                start = R.dimen.default_margin,
+                end = R.dimen.default_margin
+            )
+        )
         val sectionItems = providedItems.mapIndexed { position, item ->
-            PlaylistComponent(
-                playlistItem = item,
+            LatestPlaylistComponent(
+                shortcut = item,
                 onClick = {
-                    println("Playlist ${item.title.value} clicked at position $position")
-                    sectionItem.remove(it)
+                    println("Playlist ${item.title} clicked at position $position")
                 }
             )
         }
         sectionItem.addAll(sectionItems)
-        sectionItem.setPlaceholder(MessageComponent("Ops! Your section is empty ?;)"))
         val recyclerView = findViewById<RecyclerView>(R.id.items)
-        val componentAdapter = ComponentAdapter()
-        componentAdapter.update(
+        val componentAdapter = ComponentListAdapter()
+        componentAdapter.submitList(
             listOf(
+                HeaderComponent("Made For Jonathan Giorgi Silveira"),
+                provideRecentSearches(),
                 BannerComponent(
                     title = "Playlists",
                     onClick = { println("Banner clicked") }
@@ -50,37 +68,72 @@ class MainActivity : AppCompatActivity() {
         recyclerView.adapter = componentAdapter
     }
 
-    private fun provideGrid(): List<com.example.jonathan.domain.model.item.PlaylistItem> {
+    private fun provideGrid(): List<ShortcutItem> {
         return List(4) { index ->
-            com.example.jonathan.domain.model.item.PlaylistItem(
+            ShortcutItem(
                 id = index,
-                isRecentPlayed = index == 0,
-                size = com.example.jonathan.domain.model.properties.SizeType.SMALL,
-                cover = com.example.jonathan.domain.model.properties.Cover(
-                    size = com.example.jonathan.domain.model.properties.SizeType.SMALL,
-                    shape = com.example.jonathan.domain.model.properties.Shape.SQUARE,
-                    rounded = true,
+                isPlaying = index == 0,
+                size = SizeType.SMALL,
+                cover = Cover(
+                    size = SizeType.SMALL,
                     url = null
                 ),
-                title = com.example.jonathan.domain.model.properties.Text(
-                    value = "Playlist ${index.inc()}",
-                    style = com.example.jonathan.domain.model.properties.Text.Style.BOLD,
-                    appearance = com.example.jonathan.domain.model.properties.Text.Appearance(
-                        size = com.example.jonathan.domain.model.properties.SizeType.SMALL
-                    )
-                )
+                title = "Playlist ${index.inc()}"
             )
         }
     }
 
     private fun provideCarousel(): CarouselComponent {
-        return CarouselComponent(
-            items = List(8) {
+        val component = CarouselComponent(
+            itemDecoration = HorizontalItemDecorator(
+                end = R.dimen.margin_02,
+                start = R.dimen.no_margin
+            )
+        )
+        component.addAll(
+            List(8) {
                 AlbumComponent(
                     title = "Album #${it}",
                     subtitle = "Artist #${it}"
                 )
             }
         )
+        return component
+    }
+
+    private fun provideRecentSearches(): ViewHolderComponent {
+        val container = ListComponent(
+            itemDecoration = VerticalItemDecorator(
+                top = R.dimen.no_margin,
+                bottom = R.dimen.margin_02
+            )
+        )
+        container.addAll(
+            listOf(
+                RowComponent(
+                    coverResId = R.drawable.brave_new_world,
+                    title = "Brave New World",
+                    subtitle = "Song - Iron Maiden",
+                    trailingIconResId = R.drawable.ic_round_close_24,
+                    onTrailingIconClick = { container.remove(it) }
+                ),
+                RowComponent(
+                    coverResId = R.drawable.brave_new_world,
+                    title = "The Mercenary",
+                    subtitle = "Song - Iron Maiden",
+                    trailingIconResId = R.drawable.ic_round_close_24,
+                    onTrailingIconClick = { container.remove(it) }
+                ),
+                RowComponent(
+                    coverResId = R.drawable.brave_new_world,
+                    title = "Blood Brothers",
+                    subtitle = "Song - Iron Maiden",
+                    trailingIconResId = R.drawable.ic_round_close_24,
+                    onTrailingIconClick = { container.remove(it) }
+                )
+            )
+        )
+        container.setPlaceholder(MessageComponent("Ops! Your section is empty ?;)"))
+        return container
     }
 }
