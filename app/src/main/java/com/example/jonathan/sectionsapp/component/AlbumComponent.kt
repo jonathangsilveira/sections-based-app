@@ -1,13 +1,14 @@
 package com.example.jonathan.sectionsapp.component
 
 import android.view.View
+import com.example.jonathan.component.BindingViewHolderComponent
 import com.example.jonathan.sectionsapp.R
 import com.example.jonathan.sectionsapp.databinding.AlbumItemBinding
 
 class AlbumComponent(
     private val title: String,
     private val subtitle: String?
-) : com.example.jonathan.component.BindingViewHolderComponent<AlbumItemBinding>() {
+) : BindingViewHolderComponent<AlbumItemBinding>() {
     override fun initViewBinding(itemView: View): AlbumItemBinding {
         return AlbumItemBinding.bind(itemView)
     }
