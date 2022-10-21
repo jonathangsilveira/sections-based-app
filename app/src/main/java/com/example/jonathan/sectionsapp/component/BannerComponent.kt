@@ -1,13 +1,14 @@
 package com.example.jonathan.sectionsapp.component
 
 import android.view.View
+import com.example.jonathan.component.BindingViewHolderComponent
 import com.example.jonathan.sectionsapp.R
 import com.example.jonathan.sectionsapp.databinding.BannerItemBinding
 
 class BannerComponent(
     private val title: String,
     private val onClick: () -> Unit
-) : com.example.jonathan.component.BindingViewHolderComponent<BannerItemBinding>() {
+) : BindingViewHolderComponent<BannerItemBinding>() {
     override fun initViewBinding(itemView: View): BannerItemBinding {
         return BannerItemBinding.bind(itemView)
     }
