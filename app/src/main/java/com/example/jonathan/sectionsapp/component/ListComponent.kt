@@ -1,6 +1,8 @@
 package com.example.jonathan.sectionsapp.component
 
 import android.view.View
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ItemDecoration
 import com.example.jonathan.component.ContainerViewHolderComponent
 import com.example.jonathan.sectionsapp.R
@@ -19,6 +21,11 @@ class ListComponent(
         with(binding.verticalList) {
             removeItemDecoration(itemDecoration)
             addItemDecoration(itemDecoration)
+            layoutManager = LinearLayoutManager(
+                context,
+                RecyclerView.VERTICAL,
+                false
+            )
             setAdapterTo(this)
         }
     }
