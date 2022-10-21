@@ -12,7 +12,7 @@
         android:layout_height="wrap_content">
 
         <ImageView
-            android:id="@+id/playlistItemCover_image"
+            android:id="@+id/shortcutItemCover_image"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:scaleType="centerCrop"
@@ -24,7 +24,7 @@
             tools:ignore="ContentDescription" />
 
         <TextView
-            android:id="@+id/playlistItemTitle_text"
+            android:id="@+id/shortcutItemTitle_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -35,12 +35,12 @@
             android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/playlistItemRecent_image"
-            app:layout_constraintStart_toEndOf="@+id/playlistItemCover_image"
+            app:layout_constraintStart_toEndOf="@+id/shortcutItemCover_image"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="Brave New World" />
 
         <ImageView
-            android:id="@+id/playlistItemRecent_image"
+            android:id="@+id/shortcutItemRecent_image"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
