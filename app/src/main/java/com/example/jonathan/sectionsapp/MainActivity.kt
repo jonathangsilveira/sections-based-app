@@ -10,6 +10,9 @@ import com.example.jonathan.domain.model.properties.Cover
 import com.example.jonathan.domain.model.properties.SizeType
 import com.example.jonathan.domain.model.section.GridSection
 import com.example.jonathan.sectionsapp.component.*
+import com.example.jonathan.sectionsapp.decoration.GridItemDecorator
+import com.example.jonathan.sectionsapp.decoration.HorizontalItemDecorator
+import com.example.jonathan.sectionsapp.decoration.VerticalItemDecorator
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

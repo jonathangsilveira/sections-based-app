@@ -1,4 +1,4 @@
-package com.example.jonathan.sectionsapp.component
+package com.example.jonathan.sectionsapp.decoration
 
 import android.graphics.Rect
 import android.view.View

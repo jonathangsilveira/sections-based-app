@@ -1,13 +1,13 @@
-package com.example.jonathan.sectionsapp.component
+package com.example.jonathan.sectionsapp.decoration
 
 import android.graphics.Rect
 import android.view.View
 import androidx.annotation.DimenRes
 import androidx.recyclerview.widget.RecyclerView
 
-class VerticalItemDecorator(
-    @DimenRes private val top: Int,
-    @DimenRes private val bottom: Int
+class HorizontalItemDecorator(
+    @DimenRes private val start: Int,
+    @DimenRes private val end: Int
 ): RecyclerView.ItemDecoration() {
     override fun getItemOffsets(
         outRect: Rect,
@@ -20,10 +20,10 @@ class VerticalItemDecorator(
         if (lastPosition == RecyclerView.NO_POSITION) return
         val currentIndex = parent.getChildAdapterPosition(view)
         val isLastIndex = currentIndex == lastPosition
-        outRect.top = resources.getDimension(top).toInt()
-        outRect.bottom = if (isLastIndex) 0 else resources.getDimension(bottom).toInt()
-        outRect.left = 0
-        outRect.right = 0
+        outRect.top = 0
+        outRect.bottom = 0
+        outRect.left = resources.getDimension(start).toInt()
+        outRect.right = if (isLastIndex) 0 else resources.getDimension(end).toInt()
     }
 
     private fun RecyclerView.getLastPositionOrNoPosition(): Int {
