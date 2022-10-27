@@ -1,11 +1,13 @@
 package com.example.jonathan.sectionsapp.component
 
 import android.view.View
+import androidx.annotation.DrawableRes
 import com.example.jonathan.component.BindingViewHolderComponent
 import com.example.jonathan.sectionsapp.R
 import com.example.jonathan.sectionsapp.databinding.BannerItemBinding
 
 class BannerComponent(
+    @DrawableRes private val imageResId: Int,
     private val title: String,
     private val onClick: () -> Unit
 ) : BindingViewHolderComponent<BannerItemBinding>() {
@@ -15,6 +17,7 @@ class BannerComponent(
 
     override fun bind(binding: BannerItemBinding, position: Int) {
         with(binding) {
+            bannerItemImage.setImageResource(imageResId)
             bannerItemTitle.text = title
             root.setOnClickListener { onClick() }
         }
