@@ -5,7 +5,7 @@ import android.view.View
 import androidx.annotation.DimenRes
 import androidx.recyclerview.widget.RecyclerView
 
-class GridItemDecorator(
+class MarginItemDecoration(
     @DimenRes private val top: Int,
     @DimenRes private val bottom: Int,
     @DimenRes private val start: Int,
