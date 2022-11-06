@@ -10,15 +10,14 @@ import com.example.jonathan.domain.model.properties.Cover
 import com.example.jonathan.domain.model.properties.SizeType
 import com.example.jonathan.domain.model.section.GridSection
 import com.example.jonathan.sectionsapp.component.*
-import com.example.jonathan.sectionsapp.decoration.GridItemDecorator
+import com.example.jonathan.sectionsapp.decoration.MarginItemDecoration
 import com.example.jonathan.sectionsapp.decoration.HorizontalItemDecorator
-import com.example.jonathan.sectionsapp.decoration.VerticalItemDecorator
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
+        MarginItemDecoration(vertical = R.dimen.default_margin)
         val providedItems = provideGrid()
         val sectionItem = GridComponent(
             item = GridSection(
@@ -27,7 +26,7 @@ class MainActivity : AppCompatActivity() {
                 columnsCount = 2,
                 items = providedItems
             ),
-            itemDecorator = GridItemDecorator(
+            itemDecorator = MarginItemDecoration(
                 top = R.dimen.no_margin,
                 bottom = R.dimen.margin_02,
                 start = R.dimen.default_margin,
@@ -47,25 +46,16 @@ class MainActivity : AppCompatActivity() {
         val componentAdapter = ComponentListAdapter()
         componentAdapter.submitList(
             listOf(
-                HeaderComponent("Made For Jonathan Giorgi Silveira"),
-                provideRecentSearches(),
-                BannerComponent(
-                    title = "Playlists",
-                    onClick = { println("Banner clicked") }
-                ),
                 sectionItem,
                 HeaderComponent("Made For Jonathan Giorgi Silveira"),
                 provideCarousel(),
                 BannerComponent(
-                    title = "Another Banner",
+                    imageResId = R.drawable.senjutso_banner,
+                    title = "Most Listened Album",
                     onClick = { println("Banner clicked") }
                 ),
-                provideCarousel(),
                 HeaderComponent("Other sections"),
-                BannerComponent(
-                    title = "Final Banner",
-                    onClick = { println("Banner clicked") }
-                )
+                provideCarousel(),
             )
         )
         recyclerView.adapter = componentAdapter
@@ -105,10 +95,13 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun provideRecentSearches(): ViewHolderComponent {
+        val margin = R.dimen.margin_02
         val container = ListComponent(
-            itemDecoration = VerticalItemDecorator(
+            itemDecoration = MarginItemDecoration(
                 top = R.dimen.no_margin,
-                bottom = R.dimen.margin_02
+                bottom = margin,
+                start = margin,
+                end = margin
             )
         )
         container.addAll(
