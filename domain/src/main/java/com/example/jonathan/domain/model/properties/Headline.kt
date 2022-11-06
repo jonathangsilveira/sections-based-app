@@ -1,5 +1,5 @@
 package com.example.jonathan.domain.model.properties
 
 data class Headline(
-    val text: Text
+    val text: String
 ): Header

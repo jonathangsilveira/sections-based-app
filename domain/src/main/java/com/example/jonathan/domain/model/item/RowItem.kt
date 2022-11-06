@@ -8,6 +8,6 @@ data class RowItem(
     override val id: Int,
     override val cover: Cover,
     override val size: SizeType,
-    override val title: Text,
-    val subtitle: Text?
+    override val title: String?,
+    val subtitle: String?
 ): SectionItem
