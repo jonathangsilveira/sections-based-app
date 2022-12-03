@@ -1,6 +1,7 @@
 package com.example.jonathan.data.mapper
 
 import com.example.jonathan.data.response.property.SizeResponse
+import com.example.jonathan.domain.mapper.Mapper
 import com.example.jonathan.domain.model.properties.SizeType
 
 internal class SizeMapper: Mapper<SizeResponse?, SizeType> {

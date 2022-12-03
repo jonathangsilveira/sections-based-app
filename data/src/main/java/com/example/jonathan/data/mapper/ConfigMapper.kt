@@ -3,6 +3,7 @@ package com.example.jonathan.data.mapper
 import com.example.jonathan.data.response.property.ConfigResponse
 import com.example.jonathan.data.response.property.LayoutResponse
 import com.example.jonathan.data.response.property.OrientationResponse
+import com.example.jonathan.domain.mapper.Mapper
 import com.example.jonathan.domain.model.properties.Config
 import com.example.jonathan.domain.model.properties.Layout
 import com.example.jonathan.domain.model.properties.Orientation

@@ -4,6 +4,7 @@ import com.example.jonathan.data.response.HomeResponse
 import com.example.jonathan.data.response.item.SectionItemResponse
 import com.example.jonathan.data.response.property.ConfigResponse
 import com.example.jonathan.data.response.property.ItemTypeResponse
+import com.example.jonathan.domain.mapper.Mapper
 import com.example.jonathan.domain.model.item.SectionItem
 import com.example.jonathan.domain.model.properties.Config
 import com.example.jonathan.domain.model.properties.Header

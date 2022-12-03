@@ -2,6 +2,7 @@ package com.example.jonathan.data.mapper
 
 import com.example.jonathan.data.response.property.CoverResponse
 import com.example.jonathan.data.response.property.SizeResponse
+import com.example.jonathan.domain.mapper.Mapper
 import com.example.jonathan.domain.model.properties.Cover
 import com.example.jonathan.domain.model.properties.SizeType
 
