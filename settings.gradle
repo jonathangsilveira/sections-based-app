@@ -16,3 +16,4 @@ rootProject.name = "Sections App"
 include ':app'
 include ':uicomponent'
 include ':domain'
+include ':data'
