@@ -5,12 +5,12 @@ import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import com.example.jonathan.component.BindingViewHolderComponent
 import com.example.jonathan.component.ViewHolderComponent
-import com.example.jonathan.domain.model.item.ShortcutItem
+import com.example.jonathan.domain.model.item.RecentlyPlayedItem
 import com.example.jonathan.sectionsapp.R
 import com.example.jonathan.sectionsapp.databinding.LatestPlaylistsItemBinding
 
-class LatestPlaylistComponent(
-    private val shortcut: ShortcutItem,
+class RecentlyPlayedComponent(
+    private val shortcut: RecentlyPlayedItem,
     private val onClick: (component: ViewHolderComponent) -> Unit
 ) : BindingViewHolderComponent<LatestPlaylistsItemBinding>() {
     override fun initViewBinding(itemView: View): LatestPlaylistsItemBinding {

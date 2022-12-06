@@ -5,12 +5,12 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ItemDecoration
 import com.example.jonathan.component.ContainerViewHolderComponent
-import com.example.jonathan.domain.model.section.GridSection
+import com.example.jonathan.domain.model.section.Section
 import com.example.jonathan.sectionsapp.R
 import com.example.jonathan.sectionsapp.databinding.GridItemBinding
 
 class GridComponent(
-    private val item: GridSection,
+    private val item: Section,
     private val itemDecorator: ItemDecoration
 ) : ContainerViewHolderComponent<GridItemBinding>() {
     override fun initViewBinding(itemView: View): GridItemBinding {
@@ -25,7 +25,7 @@ class GridComponent(
             addItemDecoration(itemDecorator)
             layoutManager = GridLayoutManager(
                 context,
-                item.columnsCount,
+                item.config?.columns ?: 0,
                 RecyclerView.VERTICAL,
                 false
             )
