@@ -4,6 +4,8 @@ buildscript {
         application_version = '7.2.2'
         library_version = '7.2.2'
         kotlin_version = '1.7.10'
+        koin_version= "3.2.2"
+        koin_android_version= "3.3.0"
     }
 }
 
