@@ -20,16 +20,6 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-
-            Properties keystore = new Properties()
-            keystore.load(new FileInputStream("./data/back4app.properties"))
-            def apiKey = keystore.getProperty("apiKey")
-            def appId = keystore.getProperty("appId")
-            def baseUrl = keystore.getProperty("baseUrl")
-
-            buildConfigField "String", "API_KEY", apiKey
-            buildConfigField "String", "APP_ID", appId
-            buildConfigField "String", "REMOTE_BASE_URL", baseUrl
         }
     }
     compileOptions {
