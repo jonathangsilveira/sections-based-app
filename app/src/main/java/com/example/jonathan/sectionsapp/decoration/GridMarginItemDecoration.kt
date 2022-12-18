@@ -5,13 +5,14 @@ import android.view.View
 import androidx.annotation.DimenRes
 import androidx.recyclerview.widget.RecyclerView
 import com.example.jonathan.sectionsapp.R
+import kotlin.time.Duration.Companion.seconds
 
-open class MarginItemDecoration constructor(
-    @DimenRes protected val top: Int,
-    @DimenRes protected val bottom: Int,
-    @DimenRes protected val start: Int,
-    @DimenRes protected val end: Int
-) : RecyclerView.ItemDecoration() {
+class GridMarginItemDecoration constructor(
+    @DimenRes top: Int,
+    @DimenRes bottom: Int,
+    @DimenRes start: Int,
+    @DimenRes end: Int
+): MarginItemDecoration(top, bottom, start, end) {
 
     constructor(
         @DimenRes horizontal: Int = R.dimen.no_margin,
@@ -29,10 +30,18 @@ open class MarginItemDecoration constructor(
         parent: RecyclerView,
         state: RecyclerView.State
     ) {
+        val position = parent.getChildAdapterPosition(view)
+        if (position == RecyclerView.NO_POSITION) return
         val resources = view.resources
+        val mod = position.mod(2)
+        if (mod == 0) {
+            outRect.left = resources.getDimension(start).toInt()
+            outRect.right = resources.getDimension(end).toInt()
+        } else {
+            outRect.left = resources.getDimension(end).toInt()
+            outRect.right = resources.getDimension(start).toInt()
+        }
         outRect.top = resources.getDimension(top).toInt()
         outRect.bottom = resources.getDimension(bottom).toInt()
-        outRect.left = resources.getDimension(start).toInt()
-        outRect.right = resources.getDimension(end).toInt()
     }
 }

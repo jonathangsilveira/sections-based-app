@@ -21,6 +21,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
+        android:clipToPadding="false"
+        android:paddingTop="@dimen/margin_02"
+        android:paddingBottom="@dimen/margin_03"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:itemCount="3"
         tools:listitem="@layout/banner_item" />
