@@ -1,7 +1,7 @@
 package com.example.jonathan.data.di
 
+import com.example.jonathan.data.Back4AppInterceptor
 import com.example.jonathan.data.HomeRepositoryImpl
-import com.example.jonathan.data.Key
 import com.example.jonathan.data.mapper.*
 import com.example.jonathan.data.response.item.AlbumItemResponse
 import com.example.jonathan.data.response.item.RecentlyPlayedItemResponse
@@ -11,7 +11,6 @@ import com.example.jonathan.data.source.RemoteDataSourceImpl
 import com.example.jonathan.domain.model.properties.ItemType
 import com.example.jonathan.domain.repository.HomeRepository
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
-import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.modules.SerializersModule
 import kotlinx.serialization.modules.polymorphic
@@ -25,14 +24,7 @@ import retrofit2.create
 val dataModule = module {
     single {
         OkHttpClient.Builder()
-            .addInterceptor { chain ->
-                val request = chain.request()
-                    .newBuilder()
-                    .addHeader("X-Parse-Application-Id", Key.APP_ID)
-                    .addHeader("X-Parse-REST-API-Key", Key.KEY)
-                    .build()
-                chain.proceed(request)
-            }
+            .addInterceptor(Back4AppInterceptor())
             .build()
     }
 
