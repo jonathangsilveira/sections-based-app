@@ -3,8 +3,8 @@ package com.example.jonathan.data
 import okhttp3.Interceptor
 import okhttp3.Response
 
-private const val KEY = "9wLsbUd32T2VedYWxx1snQyhspiZWgwvuCsa1N3o"
-private const val APP_ID = "vauvThmbVatLmMUaCoAIoEhc1r4JCWCB1rFqMzHb"
+private const val KEY = "{API_KEY}"
+private const val APP_ID = "{APPLICATION_ID}"
 private const val APPLICATION_ID_HEADER = "X-Parse-Application-Id"
 private const val REST_API_KEY_HEADER = "X-Parse-REST-API-Key"
 
