@@ -8,8 +8,8 @@
 
     <ImageView
         android:id="@+id/rowItem_cover"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="@dimen/header_cover_size"
+        android:layout_height="@dimen/header_cover_size"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"

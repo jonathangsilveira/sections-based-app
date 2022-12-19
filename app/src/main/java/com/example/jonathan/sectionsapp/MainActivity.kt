@@ -7,6 +7,7 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.jonathan.component.ComponentListAdapter
+import com.example.jonathan.sectionsapp.decoration.VerticalItemDecorator
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : AppCompatActivity() {
@@ -16,6 +17,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        setupActionBar()
         setupRecyclerView()
         subscribeObservers()
         viewModel.refresh()
@@ -36,6 +38,16 @@ class MainActivity : AppCompatActivity() {
                 this.context, RecyclerView.VERTICAL, false
             )
             adapter = itemsAdapter
+            addItemDecoration(
+                VerticalItemDecorator(
+                    top = R.dimen.no_margin,
+                    bottom = R.dimen.margin_04
+                )
+            )
         }
+    }
+
+    private fun setupActionBar() {
+        supportActionBar?.setTitle(R.string.home_greeting)
     }
 }

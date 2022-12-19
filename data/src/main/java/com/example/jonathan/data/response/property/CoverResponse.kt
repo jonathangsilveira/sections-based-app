@@ -4,6 +4,6 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 internal data class CoverResponse(
-    val url: String,
-    val size: SizeResponse
+    val url: String?,
+    val size: SizeResponse?
 )

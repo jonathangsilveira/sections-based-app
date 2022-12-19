@@ -2,8 +2,13 @@
 <resources>
     <dimen name="default_margin">8dp</dimen>
     <dimen name="no_margin">0dp</dimen>
-    <dimen name="margin_02">16dp</dimen>
+    <dimen name="margin_01">4dp</dimen>
+    <dimen name="margin_02">8dp</dimen>
+    <dimen name="margin_03">16dp</dimen>
+    <dimen name="margin_04">24dp</dimen>
     <dimen name="corner_radius_small">4dp</dimen>
     <dimen name="corner_radius_medium">8dp</dimen>
     <dimen name="corner_radius_large">16dp</dimen>
+    <dimen name="header_cover_size">50dp</dimen>
+    <dimen name="no_size">0dp</dimen>
 </resources>

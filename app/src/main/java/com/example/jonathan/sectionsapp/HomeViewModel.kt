@@ -5,17 +5,13 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.jonathan.component.ViewHolderComponent
-import com.example.jonathan.domain.repository.HomeRepository
 import com.example.jonathan.domain.request.HomeRequest
 import com.example.jonathan.sectionsapp.domain.usecase.GetHomeUseCase
-import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 internal class HomeViewModel(
     private val getHomeUseCase: GetHomeUseCase
-): ViewModel() {
+) : ViewModel() {
 
     private val _stateObserver = MutableLiveData(HomeState())
 
@@ -51,6 +47,7 @@ internal class HomeViewModel(
     }
 
     private fun onFailure(cause: Throwable) {
+        println(cause)
         updateState { currentState ->
             currentState.copy(
                 isLoading = false,
