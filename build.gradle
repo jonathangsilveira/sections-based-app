@@ -4,13 +4,16 @@ buildscript {
         application_version = '7.2.2'
         library_version = '7.2.2'
         kotlin_version = '1.7.10'
+        koin_version= "3.2.2"
+        koin_android_version= "3.3.0"
     }
 }
 
 plugins {
-    id 'com.android.application' version '7.2.2' apply false
-    id 'com.android.library' version '7.2.2' apply false
-    id 'org.jetbrains.kotlin.android' version '1.7.10' apply false
+    id 'com.android.application' version '7.3.0' apply false
+    id 'com.android.library' version '7.3.0' apply false
+    id 'org.jetbrains.kotlin.android' version "$kotlin_version" apply false
+    id 'org.jetbrains.kotlin.jvm' version '1.7.10' apply false
 }
 
 task clean(type: Delete) {
