@@ -8,7 +8,7 @@ private const val APP_ID = "{APPLICATION_ID}"
 private const val APPLICATION_ID_HEADER = "X-Parse-Application-Id"
 private const val REST_API_KEY_HEADER = "X-Parse-REST-API-Key"
 
-class Back4AppInterceptor: Interceptor {
+internal class Back4AppInterceptor: Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
         val request = chain.request()
             .newBuilder()
