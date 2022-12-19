@@ -21,6 +21,8 @@ import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.create
 
+private const val REMOTE_BASE_URL = "https://parseapi.back4app.com/parse/functions/"
+
 val dataModule = module {
     single {
         OkHttpClient.Builder()
@@ -42,7 +44,7 @@ val dataModule = module {
             }
         }
         Retrofit.Builder()
-            .baseUrl("https://parseapi.back4app.com/parse/functions/")
+            .baseUrl(REMOTE_BASE_URL)
             .addConverterFactory(json.asConverterFactory(contentType))
             .client(get<OkHttpClient>())
             .build()
