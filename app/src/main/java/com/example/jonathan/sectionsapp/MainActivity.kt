@@ -17,6 +17,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        setupActionBar()
         setupRecyclerView()
         subscribeObservers()
         viewModel.refresh()
@@ -44,5 +45,9 @@ class MainActivity : AppCompatActivity() {
                 )
             )
         }
+    }
+
+    private fun setupActionBar() {
+        supportActionBar?.setTitle(R.string.home_greeting)
     }
 }
