@@ -1,8 +1,11 @@
 package com.example.jonathan.sectionsapp.component
 
+import android.util.Log
 import android.view.View
 import androidx.core.view.isGone
+import coil.ImageLoader
 import coil.load
+import coil.request.ImageRequest
 import coil.size.Scale
 import com.example.jonathan.component.BindingViewHolderComponent
 import com.example.jonathan.domain.model.item.AlbumItem
@@ -35,8 +38,8 @@ class AlbumComponent(
 
     private fun bindCover(binding: AlbumItemBinding) {
         binding.albumItemCoverImage.load(album.cover.url) {
-            placeholder(R.drawable.ic_baseline_image_24)
-            error(R.drawable.ic_round_broken_image_24)
+            placeholder(R.drawable.album_placeholder)
+            error(R.drawable.album_placeholder)
             scale(Scale.FIT)
         }
     }
