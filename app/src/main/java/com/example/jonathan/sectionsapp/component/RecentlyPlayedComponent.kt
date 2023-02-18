@@ -31,8 +31,8 @@ class RecentlyPlayedComponent(
     private fun bindImage(binding: LatestPlaylistsItemBinding) {
         binding.shortcutItemRecentImage
             .load(recentlyPlayedItem.cover.url) {
-                placeholder(R.drawable.ic_baseline_image_24)
-                error(R.drawable.ic_round_broken_image_24)
+                placeholder(R.drawable.album_placeholder)
+                error(R.drawable.album_placeholder)
                 scale(Scale.FIT)
             }
     }
