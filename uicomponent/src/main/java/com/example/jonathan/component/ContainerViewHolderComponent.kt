@@ -3,10 +3,20 @@ package com.example.jonathan.component
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
 
-abstract class ContainerViewHolderComponent<VB : ViewBinding>(
+abstract class ContainerViewHolderComponent<VB : ViewBinding>
+    : BindingViewHolderComponent<VB>(), Container {
     private val adapter: ComponentAdapter = ComponentAdapter()
-) : BindingViewHolderComponent<VB>(), Container by adapter {
     private var placeholder: ViewHolderComponent? = null
+
+    override fun add(component: ViewHolderComponent) {
+        if (isShowingPlaceholder()) removePlaceholder()
+        this.adapter.add(component)
+    }
+
+    override fun addAll(components: List<ViewHolderComponent>) {
+        if (isShowingPlaceholder()) removePlaceholder()
+        this.adapter.addAll(components)
+    }
 
     override fun remove(component: ViewHolderComponent) {
         this.adapter.remove(component)
@@ -23,6 +33,11 @@ abstract class ContainerViewHolderComponent<VB : ViewBinding>(
         updateEmptyState()
     }
 
+    override fun isEmpty(): Boolean = isEmpty() || isShowingPlaceholder()
+
+    override fun contains(component: ViewHolderComponent): Boolean =
+        this.adapter.contains(component)
+
     fun setPlaceholder(placeholder: ViewHolderComponent) {
         this.placeholder = placeholder
     }
@@ -37,7 +52,7 @@ abstract class ContainerViewHolderComponent<VB : ViewBinding>(
     }
 
     private fun shouldDisplayPlaceholder(): Boolean {
-        return isEmpty() && hasPlaceholder()
+        return isEmpty() || isShowingPlaceholder().not()
     }
 
     private fun showPlaceholder() {
@@ -46,5 +61,12 @@ abstract class ContainerViewHolderComponent<VB : ViewBinding>(
         }
     }
 
-    private fun hasPlaceholder(): Boolean = placeholder != null
+    private fun isShowingPlaceholder(): Boolean {
+        val placeholder = placeholder ?: return false
+        return this.adapter.contains(placeholder)
+    }
+
+    private fun removePlaceholder() {
+        placeholder?.let { this.adapter.remove(it) }
+    }
 }
