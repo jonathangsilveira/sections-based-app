@@ -5,6 +5,7 @@ import androidx.core.view.isGone
 import coil.load
 import coil.size.Scale
 import com.example.jonathan.component.BindingViewHolderComponent
+import com.example.jonathan.component.OnItemEvent
 import com.example.jonathan.domain.model.properties.Header
 import com.example.jonathan.sectionsapp.R
 import com.example.jonathan.sectionsapp.databinding.HeaderItemBinding
@@ -16,7 +17,7 @@ class HeaderComponent(
         return HeaderItemBinding.bind(itemView)
     }
 
-    override fun bind(binding: HeaderItemBinding, position: Int) {
+    override fun bind(binding: HeaderItemBinding, position: Int, onItemEvent: OnItemEvent) {
         with(binding) {
             headetItemTitleText.text = header.title
             bindSubtitle(binding)

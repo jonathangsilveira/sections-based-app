@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ItemDecoration
 import com.example.jonathan.component.ContainerViewHolderComponent
+import com.example.jonathan.component.OnItemEvent
 import com.example.jonathan.domain.model.section.Section
 import com.example.jonathan.sectionsapp.R
 import com.example.jonathan.sectionsapp.databinding.GridItemBinding
@@ -19,7 +20,7 @@ class GridComponent(
 
     override fun viewType(): Int = R.layout.grid_item
 
-    override fun bind(binding: GridItemBinding, position: Int) {
+    override fun bind(binding: GridItemBinding, position: Int, onItemEvent: OnItemEvent) {
         with(binding.gridItems) {
             removeItemDecoration(itemDecorator)
             addItemDecoration(itemDecorator)

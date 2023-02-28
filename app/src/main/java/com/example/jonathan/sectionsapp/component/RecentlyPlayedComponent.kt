@@ -6,24 +6,34 @@ import androidx.core.view.isVisible
 import coil.load
 import coil.size.Scale
 import com.example.jonathan.component.BindingViewHolderComponent
+import com.example.jonathan.component.OnItemEvent
 import com.example.jonathan.component.ViewHolderComponent
 import com.example.jonathan.domain.model.item.RecentlyPlayedItem
 import com.example.jonathan.sectionsapp.R
 import com.example.jonathan.sectionsapp.databinding.LatestPlaylistsItemBinding
 
 class RecentlyPlayedComponent(
-    private val recentlyPlayedItem: RecentlyPlayedItem,
-    private val onClick: (component: ViewHolderComponent) -> Unit
+    private val recentlyPlayedItem: RecentlyPlayedItem
 ) : BindingViewHolderComponent<LatestPlaylistsItemBinding>() {
     override fun initViewBinding(itemView: View): LatestPlaylistsItemBinding {
         return LatestPlaylistsItemBinding.bind(itemView)
     }
 
-    override fun bind(binding: LatestPlaylistsItemBinding, position: Int) {
+    override fun bind(
+        binding: LatestPlaylistsItemBinding,
+        position: Int,
+        onItemEvent: OnItemEvent
+    ) {
         bindImage(binding)
         bindTitle(binding)
         bindRecentIndicator(binding)
-        setOnClickListener(binding)
+        with(binding.root) {
+            setOnClickListener { HomeItemEvent.ItemClicked }
+            setOnLongClickListener {
+                HomeItemEvent.ItemLongClicked
+                true
+            }
+        }
     }
 
     override fun viewType(): Int = R.layout.latest_playlists_item
@@ -46,9 +56,5 @@ class RecentlyPlayedComponent(
 
     private fun bindRecentIndicator(binding: LatestPlaylistsItemBinding) {
         binding.shortcutItemRecentImage.isVisible = recentlyPlayedItem.isPlaying
-    }
-
-    private fun setOnClickListener(binding: LatestPlaylistsItemBinding) {
-        binding.root.setOnClickListener { onClick(this) }
     }
 }

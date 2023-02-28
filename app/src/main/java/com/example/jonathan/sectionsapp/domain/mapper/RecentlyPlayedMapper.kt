@@ -7,6 +7,6 @@ import com.example.jonathan.sectionsapp.component.RecentlyPlayedComponent
 
 internal class RecentlyPlayedMapper: Mapper<RecentlyPlayedItem, ViewHolderComponent> {
     override fun map(value: RecentlyPlayedItem): ViewHolderComponent {
-        return RecentlyPlayedComponent(value) {  }
+        return RecentlyPlayedComponent(value)
     }
 }

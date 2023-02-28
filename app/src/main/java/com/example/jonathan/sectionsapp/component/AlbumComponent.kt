@@ -1,13 +1,11 @@
 package com.example.jonathan.sectionsapp.component
 
-import android.util.Log
 import android.view.View
 import androidx.core.view.isGone
-import coil.ImageLoader
 import coil.load
-import coil.request.ImageRequest
 import coil.size.Scale
 import com.example.jonathan.component.BindingViewHolderComponent
+import com.example.jonathan.component.OnItemEvent
 import com.example.jonathan.domain.model.item.AlbumItem
 import com.example.jonathan.sectionsapp.R
 import com.example.jonathan.sectionsapp.databinding.AlbumItemBinding
@@ -21,11 +19,16 @@ class AlbumComponent(
 
     override fun viewType(): Int = R.layout.album_item
 
-    override fun bind(binding: AlbumItemBinding, position: Int) {
+    override fun bind(binding: AlbumItemBinding, position: Int, onItemEvent: OnItemEvent) {
         with(binding) {
             albumItemTitleText.text = album.title
             bindSubtitle(this)
             bindCover(this)
+            root.setOnClickListener { onItemEvent(HomeItemEvent.ItemClicked) }
+            root.setOnLongClickListener {
+                onItemEvent(HomeItemEvent.ItemLongClicked)
+                true
+            }
         }
     }
 

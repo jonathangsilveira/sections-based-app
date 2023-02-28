@@ -12,7 +12,9 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : AppCompatActivity() {
     private val viewModel: HomeViewModel by viewModel()
-    private val itemsAdapter: ComponentListAdapter by lazy { ComponentListAdapter() }
+    private val itemsAdapter: ComponentListAdapter by lazy {
+        ComponentListAdapter(viewModel::onItemAction)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,9 +36,7 @@ class MainActivity : AppCompatActivity() {
     private fun setupRecyclerView() {
         val recyclerView = findViewById<RecyclerView>(R.id.items)
         with(recyclerView) {
-            layoutManager = LinearLayoutManager(
-                this.context, RecyclerView.VERTICAL, false
-            )
+            setVerticalLayoutManager(reverseLayout = false)
             adapter = itemsAdapter
             addItemDecoration(
                 VerticalItemDecorator(
