@@ -3,7 +3,10 @@ package com.example.jonathan.component
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 
-class ComponentAdapter : RecyclerView.Adapter<ComponentViewHolder>(), Container {
+
+class ComponentAdapter(
+    var onActionItem: OnItemEvent = {}
+) : RecyclerView.Adapter<ComponentViewHolder>(), Container {
     private val items: MutableList<ViewHolderComponent> = mutableListOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ComponentViewHolder {
@@ -13,7 +16,7 @@ class ComponentAdapter : RecyclerView.Adapter<ComponentViewHolder>(), Container 
 
     override fun onBindViewHolder(holder: ComponentViewHolder, position: Int) {
         val item = items[position]
-        holder.bind(item, position)
+        holder.bindTo(item, position, onActionItem)
     }
 
     override fun getItemCount(): Int = items.size

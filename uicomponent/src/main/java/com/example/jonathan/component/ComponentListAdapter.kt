@@ -4,7 +4,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil.ItemCallback
 import androidx.recyclerview.widget.ListAdapter
 
-class ComponentListAdapter :
+class ComponentListAdapter(
+    var onItemEvent: OnItemEvent = {}
+) :
     ListAdapter<ViewHolderComponent, ComponentViewHolder>(ViewHolderComponentDiffer()) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ComponentViewHolder {
         val item = getItemOrThrow(viewType)
@@ -13,7 +15,7 @@ class ComponentListAdapter :
 
     override fun onBindViewHolder(holder: ComponentViewHolder, position: Int) {
         val item = getItem(position)
-        holder.bind(item, position)
+        holder.bindTo(item, position, onItemEvent)
     }
 
     override fun getItemViewType(position: Int): Int {

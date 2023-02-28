@@ -9,7 +9,7 @@ interface ViewHolderComponent {
     @LayoutRes fun viewType(): Int
     fun createViewHolder(parent: ViewGroup): ComponentViewHolder
     fun inflateLayout(parent: ViewGroup): View
-    fun bind(itemView: View, position: Int)
+    fun bind(itemView: View, position: Int, onItemEvent: OnItemEvent)
     fun isSameAs(other: ViewHolderComponent): Boolean
     fun isSameContentAs(other: ViewHolderComponent): Boolean
 }

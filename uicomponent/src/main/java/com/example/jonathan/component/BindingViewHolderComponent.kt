@@ -20,8 +20,8 @@ abstract class BindingViewHolderComponent<VB : ViewBinding> : ViewHolderComponen
                 false
             )
     }
-    override fun bind(itemView: View, position: Int) {
-        bind(initViewBinding(itemView), position)
+    override fun bind(itemView: View, position: Int, onItemEvent: OnItemEvent) {
+        bind(initViewBinding(itemView), position, onItemEvent)
     }
 
     override fun isSameAs(other: ViewHolderComponent): Boolean = this == other
@@ -29,5 +29,5 @@ abstract class BindingViewHolderComponent<VB : ViewBinding> : ViewHolderComponen
     override fun isSameContentAs(other: ViewHolderComponent): Boolean = id == other.id
 
     abstract fun initViewBinding(itemView: View): VB
-    abstract fun bind(binding: VB, position: Int)
+    abstract fun bind(binding: VB, position: Int, onItemEvent: OnItemEvent)
 }

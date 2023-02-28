@@ -42,6 +42,10 @@ abstract class ContainerViewHolderComponent<VB : ViewBinding>
         this.placeholder = placeholder
     }
 
+    fun setOnItemEventListener(onItemEvent: OnItemEvent) {
+        this.adapter.onActionItem = onItemEvent
+    }
+
     fun setAdapterTo(recyclerView: RecyclerView) {
         recyclerView.adapter = this.adapter
     }
