@@ -14,6 +14,6 @@ dependencyResolutionManagement {
 }
 rootProject.name = "Sections App"
 include ':app'
-include ':uicomponent'
+include ':recyclerview'
 include ':domain'
 include ':data'

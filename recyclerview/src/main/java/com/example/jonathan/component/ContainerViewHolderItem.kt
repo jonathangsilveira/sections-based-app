@@ -3,23 +3,23 @@ package com.example.jonathan.component
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
 
-abstract class ContainerViewHolderComponent<VB : ViewBinding>
-    : BindingViewHolderComponent<VB>(), Container {
-    private val adapter: ComponentAdapter = ComponentAdapter()
-    private var placeholder: ViewHolderComponent? = null
+abstract class ContainerViewHolderItem<VB : ViewBinding>
+    : BindingViewHolderItem<VB>(), ViewHolderItemContainer {
+    private val adapter: ItemAdapter = ItemAdapter()
+    private var placeholder: ViewHolderItem? = null
 
-    override fun add(component: ViewHolderComponent) {
+    override fun add(item: ViewHolderItem) {
         if (isShowingPlaceholder()) removePlaceholder()
-        this.adapter.add(component)
+        this.adapter.add(item)
     }
 
-    override fun addAll(components: List<ViewHolderComponent>) {
+    override fun addAll(items: List<ViewHolderItem>) {
         if (isShowingPlaceholder()) removePlaceholder()
-        this.adapter.addAll(components)
+        this.adapter.addAll(items)
     }
 
-    override fun remove(component: ViewHolderComponent) {
-        this.adapter.remove(component)
+    override fun remove(item: ViewHolderItem) {
+        this.adapter.remove(item)
         updateEmptyState()
     }
 
@@ -35,10 +35,10 @@ abstract class ContainerViewHolderComponent<VB : ViewBinding>
 
     override fun isEmpty(): Boolean = isEmpty() || isShowingPlaceholder()
 
-    override fun contains(component: ViewHolderComponent): Boolean =
-        this.adapter.contains(component)
+    override fun contains(item: ViewHolderItem): Boolean =
+        this.adapter.contains(item)
 
-    fun setPlaceholder(placeholder: ViewHolderComponent) {
+    fun setPlaceholder(placeholder: ViewHolderItem) {
         this.placeholder = placeholder
     }
 

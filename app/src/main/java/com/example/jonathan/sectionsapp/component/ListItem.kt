@@ -4,14 +4,14 @@ import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ItemDecoration
-import com.example.jonathan.component.ContainerViewHolderComponent
+import com.example.jonathan.component.ContainerViewHolderItem
 import com.example.jonathan.component.OnItemEvent
 import com.example.jonathan.sectionsapp.R
 import com.example.jonathan.sectionsapp.databinding.VerticalListItemBinding
 
-class ListComponent(
+class ListItem(
     private val itemDecoration: ItemDecoration
-) : ContainerViewHolderComponent<VerticalListItemBinding>() {
+) : ContainerViewHolderItem<VerticalListItemBinding>() {
     override fun initViewBinding(itemView: View): VerticalListItemBinding {
         return VerticalListItemBinding.bind(itemView)
     }

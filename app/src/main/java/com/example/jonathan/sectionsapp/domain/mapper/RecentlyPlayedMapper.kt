@@ -1,12 +1,10 @@
 package com.example.jonathan.sectionsapp.domain.mapper
 
-import com.example.jonathan.component.ViewHolderComponent
+import com.example.jonathan.component.ViewHolderItem
 import com.example.jonathan.domain.mapper.Mapper
-import com.example.jonathan.domain.model.item.RecentlyPlayedItem
-import com.example.jonathan.sectionsapp.component.RecentlyPlayedComponent
 
-internal class RecentlyPlayedMapper: Mapper<RecentlyPlayedItem, ViewHolderComponent> {
-    override fun map(value: RecentlyPlayedItem): ViewHolderComponent {
-        return RecentlyPlayedComponent(value)
+internal class RecentlyPlayedMapper: Mapper<com.example.jonathan.domain.model.item.RecentlyPlayedItem, ViewHolderItem> {
+    override fun map(value: com.example.jonathan.domain.model.item.RecentlyPlayedItem): ViewHolderItem {
+        return com.example.jonathan.sectionsapp.component.RecentlyPlayedItem(value)
     }
 }

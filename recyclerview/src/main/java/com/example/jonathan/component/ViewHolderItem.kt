@@ -4,12 +4,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 
-interface ViewHolderComponent {
+interface ViewHolderItem {
     val id: String
     @LayoutRes fun viewType(): Int
-    fun createViewHolder(parent: ViewGroup): ComponentViewHolder
+    fun createViewHolder(parent: ViewGroup): ItemViewHolder
     fun inflateLayout(parent: ViewGroup): View
     fun bind(itemView: View, position: Int, onItemEvent: OnItemEvent)
-    fun isSameAs(other: ViewHolderComponent): Boolean
-    fun isSameContentAs(other: ViewHolderComponent): Boolean
+    fun isSameAs(other: ViewHolderItem): Boolean
+    fun isSameContentAs(other: ViewHolderItem): Boolean
 }

@@ -1,14 +1,14 @@
 package com.example.jonathan.sectionsapp.component
 
 import android.view.View
-import com.example.jonathan.component.BindingViewHolderComponent
+import com.example.jonathan.component.BindingViewHolderItem
 import com.example.jonathan.component.OnItemEvent
 import com.example.jonathan.sectionsapp.R
 import com.example.jonathan.sectionsapp.databinding.MessageItemBinding
 
-class MessageComponent(
+class MessageItem(
     private val message: String
-) : BindingViewHolderComponent<MessageItemBinding>() {
+) : BindingViewHolderItem<MessageItemBinding>() {
     override fun initViewBinding(itemView: View): MessageItemBinding {
         return MessageItemBinding.bind(itemView)
     }

@@ -2,15 +2,15 @@ package com.example.jonathan.sectionsapp.component
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView.ItemDecoration
-import com.example.jonathan.component.ContainerViewHolderComponent
+import com.example.jonathan.component.ContainerViewHolderItem
 import com.example.jonathan.component.OnItemEvent
 import com.example.jonathan.sectionsapp.R
 import com.example.jonathan.sectionsapp.databinding.CarouselItemBinding
 import com.example.jonathan.sectionsapp.setHorizontalLayoutManager
 
-class CarouselComponent(
+class CarouselItem(
     private val itemDecoration: ItemDecoration
-) : ContainerViewHolderComponent<CarouselItemBinding>() {
+) : ContainerViewHolderItem<CarouselItemBinding>() {
     override fun initViewBinding(itemView: View): CarouselItemBinding {
         return CarouselItemBinding.bind(itemView)
     }

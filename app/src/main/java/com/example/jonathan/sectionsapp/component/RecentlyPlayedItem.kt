@@ -5,16 +5,15 @@ import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import coil.load
 import coil.size.Scale
-import com.example.jonathan.component.BindingViewHolderComponent
+import com.example.jonathan.component.BindingViewHolderItem
 import com.example.jonathan.component.OnItemEvent
-import com.example.jonathan.component.ViewHolderComponent
 import com.example.jonathan.domain.model.item.RecentlyPlayedItem
 import com.example.jonathan.sectionsapp.R
 import com.example.jonathan.sectionsapp.databinding.LatestPlaylistsItemBinding
 
-class RecentlyPlayedComponent(
+class RecentlyPlayedItem(
     private val recentlyPlayedItem: RecentlyPlayedItem
-) : BindingViewHolderComponent<LatestPlaylistsItemBinding>() {
+) : BindingViewHolderItem<LatestPlaylistsItemBinding>() {
     override fun initViewBinding(itemView: View): LatestPlaylistsItemBinding {
         return LatestPlaylistsItemBinding.bind(itemView)
     }

@@ -1,24 +1,24 @@
 package com.example.jonathan.sectionsapp.domain.mapper
 
-import com.example.jonathan.component.ViewHolderComponent
+import com.example.jonathan.component.ViewHolderItem
 import com.example.jonathan.domain.mapper.Mapper
 import com.example.jonathan.domain.model.item.SectionItem
 import com.example.jonathan.domain.model.properties.*
 import com.example.jonathan.domain.model.section.Section
 import com.example.jonathan.sectionsapp.R
-import com.example.jonathan.sectionsapp.component.CarouselComponent
-import com.example.jonathan.sectionsapp.component.GridComponent
-import com.example.jonathan.sectionsapp.component.ListComponent
+import com.example.jonathan.sectionsapp.component.CarouselItem
+import com.example.jonathan.sectionsapp.component.GridItem
+import com.example.jonathan.sectionsapp.component.ListItem
 import com.example.jonathan.sectionsapp.decoration.GridMarginItemDecoration
 import com.example.jonathan.sectionsapp.decoration.HorizontalItemDecorator
 import com.example.jonathan.sectionsapp.decoration.MarginItemDecoration
 
 internal class SectionsMapper(
-    private val headerMapper: Mapper<Header, ViewHolderComponent>,
-    private val itemMapper: Map<ItemType, Mapper<SectionItem, ViewHolderComponent?>>
-): Mapper<List<Section>, List<ViewHolderComponent>> {
-    override fun map(value: List<Section>): List<ViewHolderComponent> {
-        val components = mutableListOf<ViewHolderComponent>()
+    private val headerMapper: Mapper<Header, ViewHolderItem>,
+    private val itemMapper: Map<ItemType, Mapper<SectionItem, ViewHolderItem?>>
+): Mapper<List<Section>, List<ViewHolderItem>> {
+    override fun map(value: List<Section>): List<ViewHolderItem> {
+        val components = mutableListOf<ViewHolderItem>()
         for (section in value) {
             section.header?.let { header ->
                 val headerComponent = headerMapper.map(header)
@@ -41,7 +41,7 @@ internal class SectionsMapper(
         config: Config,
         section: Section
     ) = when (config.layout) {
-        Layout.GRID -> GridComponent(
+        Layout.GRID -> GridItem(
             item = section,
             itemDecorator = GridMarginItemDecoration(
                 top = R.dimen.margin_02,
@@ -51,10 +51,10 @@ internal class SectionsMapper(
             )
         )
         Layout.LINEAR -> when (config.orientation) {
-            Orientation.HORIZONTAL -> CarouselComponent(
+            Orientation.HORIZONTAL -> CarouselItem(
                 HorizontalItemDecorator(start = R.dimen.no_margin, end = R.dimen.margin_02)
             )
-            Orientation.VERTICAL -> ListComponent(MarginItemDecoration())
+            Orientation.VERTICAL -> ListItem(MarginItemDecoration())
         }
     }
 }

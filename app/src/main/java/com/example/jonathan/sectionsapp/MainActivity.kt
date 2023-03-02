@@ -4,16 +4,15 @@ import android.os.Bundle
 import android.widget.ProgressBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.jonathan.component.ComponentListAdapter
+import com.example.jonathan.component.ItemListAdapter
 import com.example.jonathan.sectionsapp.decoration.VerticalItemDecorator
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : AppCompatActivity() {
     private val viewModel: HomeViewModel by viewModel()
-    private val itemsAdapter: ComponentListAdapter by lazy {
-        ComponentListAdapter(viewModel::onItemAction)
+    private val itemsAdapter: ItemListAdapter by lazy {
+        ItemListAdapter(viewModel::onItemAction)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

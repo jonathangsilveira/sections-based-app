@@ -4,16 +4,16 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil.ItemCallback
 import androidx.recyclerview.widget.ListAdapter
 
-class ComponentListAdapter(
+class ItemListAdapter(
     var onItemEvent: OnItemEvent = {}
 ) :
-    ListAdapter<ViewHolderComponent, ComponentViewHolder>(ViewHolderComponentDiffer()) {
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ComponentViewHolder {
+    ListAdapter<ViewHolderItem, ItemViewHolder>(ViewHolderComponentDiffer()) {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
         val item = getItemOrThrow(viewType)
         return item.createViewHolder(parent)
     }
 
-    override fun onBindViewHolder(holder: ComponentViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
         val item = getItem(position)
         holder.bindTo(item, position, onItemEvent)
     }
@@ -22,19 +22,19 @@ class ComponentListAdapter(
         return getItem(position).viewType()
     }
 
-    private fun getItemOrThrow(viewType: Int): ViewHolderComponent {
+    private fun getItemOrThrow(viewType: Int): ViewHolderItem {
         return currentList.find { it.viewType() == viewType } ?: throw NotImplementedError()
     }
 
-    private class ViewHolderComponentDiffer : ItemCallback<ViewHolderComponent>() {
+    private class ViewHolderComponentDiffer : ItemCallback<ViewHolderItem>() {
         override fun areItemsTheSame(
-            oldItem: ViewHolderComponent,
-            newItem: ViewHolderComponent
+            oldItem: ViewHolderItem,
+            newItem: ViewHolderItem
         ): Boolean = oldItem.isSameAs(newItem)
 
         override fun areContentsTheSame(
-            oldItem: ViewHolderComponent,
-            newItem: ViewHolderComponent
+            oldItem: ViewHolderItem,
+            newItem: ViewHolderItem
         ): Boolean = oldItem.isSameContentAs(newItem)
     }
 }

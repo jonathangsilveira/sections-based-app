@@ -2,18 +2,17 @@ package com.example.jonathan.sectionsapp.component
 
 import android.view.View
 import androidx.annotation.DrawableRes
-import com.example.jonathan.component.BindingViewHolderComponent
+import com.example.jonathan.component.BindingViewHolderItem
 import com.example.jonathan.component.OnItemEvent
-import com.example.jonathan.component.ViewHolderComponent
 import com.example.jonathan.sectionsapp.R
 import com.example.jonathan.sectionsapp.databinding.RowItemBinding
 
-class RowComponent(
+class RowItem(
     @DrawableRes private val coverResId: Int,
     private val title: String,
     private val subtitle: String,
     @DrawableRes private val trailingIconResId: Int,
-) : BindingViewHolderComponent<RowItemBinding>() {
+) : BindingViewHolderItem<RowItemBinding>() {
     override fun initViewBinding(itemView: View): RowItemBinding {
         return RowItemBinding.bind(itemView)
     }

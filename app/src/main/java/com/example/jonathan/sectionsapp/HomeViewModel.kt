@@ -5,7 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.jonathan.component.ViewHolderComponent
+import com.example.jonathan.component.ViewHolderItem
 import com.example.jonathan.component.ViewHolderItemEvent
 import com.example.jonathan.domain.request.HomeRequest
 import com.example.jonathan.sectionsapp.component.HomeItemEvent
@@ -39,7 +39,7 @@ internal class HomeViewModel(
         }
     }
 
-    private fun onSuccess(components: List<ViewHolderComponent>) {
+    private fun onSuccess(components: List<ViewHolderItem>) {
         updateState { currentState ->
             currentState.copy(
                 isLoading = false,

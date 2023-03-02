@@ -1,6 +1,6 @@
 package com.example.jonathan.sectionsapp.di
 
-import com.example.jonathan.component.ViewHolderComponent
+import com.example.jonathan.component.ViewHolderItem
 import com.example.jonathan.domain.mapper.Mapper
 import com.example.jonathan.domain.model.item.SectionItem
 import com.example.jonathan.domain.model.properties.ItemType
@@ -31,7 +31,7 @@ val homeModule = module {
             itemMapper = mapOf(
                 ItemType.RECENTLY_PLAYED to RecentlyPlayedMapper(),
                 ItemType.ALBUM to AlbumMapper()
-            ) as Map<ItemType, Mapper<SectionItem, ViewHolderComponent?>>
+            ) as Map<ItemType, Mapper<SectionItem, ViewHolderItem?>>
         )
     }
 }

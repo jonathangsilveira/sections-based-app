@@ -4,17 +4,17 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 
 
-class ComponentAdapter(
+class ItemAdapter(
     var onActionItem: OnItemEvent = {}
-) : RecyclerView.Adapter<ComponentViewHolder>(), Container {
-    private val items: MutableList<ViewHolderComponent> = mutableListOf()
+) : RecyclerView.Adapter<ItemViewHolder>(), ViewHolderItemContainer {
+    private val items: MutableList<ViewHolderItem> = mutableListOf()
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ComponentViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
         val item = getItemOrThrow(viewType)
         return item.createViewHolder(parent)
     }
 
-    override fun onBindViewHolder(holder: ComponentViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
         val item = items[position]
         holder.bindTo(item, position, onActionItem)
     }
@@ -25,23 +25,23 @@ class ComponentAdapter(
         return items[position].viewType()
     }
 
-    private fun getItemOrThrow(viewType: Int): ViewHolderComponent {
+    private fun getItemOrThrow(viewType: Int): ViewHolderItem {
         return items.find { it.viewType() == viewType } ?: throw NotImplementedError()
     }
 
-    override fun add(component: ViewHolderComponent) {
-        this.items.add(component)
+    override fun add(item: ViewHolderItem) {
+        this.items.add(item)
         notifyItemInserted(this.items.lastIndex)
     }
 
-    override fun addAll(components: List<ViewHolderComponent>) {
-        this.items.addAll(components)
+    override fun addAll(items: List<ViewHolderItem>) {
+        this.items.addAll(items)
         val insertedCount = itemCount
         notifyItemRangeInserted(0, insertedCount)
     }
 
-    override fun remove(component: ViewHolderComponent) {
-        val position = this.items.indexOf(component)
+    override fun remove(item: ViewHolderItem) {
+        val position = this.items.indexOf(item)
         removeAt(position)
     }
 
@@ -58,5 +58,5 @@ class ComponentAdapter(
 
     override fun isEmpty(): Boolean = this.items.isEmpty()
 
-    override fun contains(component: ViewHolderComponent): Boolean = this.items.contains(component)
+    override fun contains(item: ViewHolderItem): Boolean = this.items.contains(item)
 }

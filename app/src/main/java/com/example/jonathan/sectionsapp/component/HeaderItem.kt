@@ -4,15 +4,15 @@ import android.view.View
 import androidx.core.view.isGone
 import coil.load
 import coil.size.Scale
-import com.example.jonathan.component.BindingViewHolderComponent
+import com.example.jonathan.component.BindingViewHolderItem
 import com.example.jonathan.component.OnItemEvent
 import com.example.jonathan.domain.model.properties.Header
 import com.example.jonathan.sectionsapp.R
 import com.example.jonathan.sectionsapp.databinding.HeaderItemBinding
 
-class HeaderComponent(
+class HeaderItem(
     private val header: Header
-) : BindingViewHolderComponent<HeaderItemBinding>() {
+) : BindingViewHolderItem<HeaderItemBinding>() {
     override fun initViewBinding(itemView: View): HeaderItemBinding {
         return HeaderItemBinding.bind(itemView)
     }
