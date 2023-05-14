@@ -18,7 +18,7 @@ class ItemAdapter(
     )
     private var itemForViewTypeLookUp: ViewHolderItem? = null
 
-    val currentList: List<ViewHolderItem> get() = listDiffer.currentList
+    private val currentList: List<ViewHolderItem> get() = listDiffer.currentList
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
         val item = getItemOrThrow(viewType)
@@ -42,8 +42,8 @@ class ItemAdapter(
                 return it
             }
         }
-        val item =
-            currentList.find { it.viewType() == viewType } ?: throw NotImplementedError()
+        val item = currentList.find { it.viewType() == viewType }
+            ?: throw NotImplementedError()
         itemForViewTypeLookUp = item
         return item
     }
@@ -82,6 +82,8 @@ class ItemAdapter(
 
     override fun contains(item: ViewHolderItem): Boolean = currentList.contains(item)
 
+    private fun getItem(position: Int): ViewHolderItem = currentList[position]
+
     private fun updateCurrentList(
         block: MutableList<ViewHolderItem>.() -> Unit
     ): List<ViewHolderItem> {
@@ -89,13 +91,6 @@ class ItemAdapter(
         mutableCurrentList.apply(block)
         return mutableCurrentList
     }
-
-    fun onCurrentListChanged(
-        previousList: List<ViewHolderItem>,
-        currentList: List<ViewHolderItem>
-    ) {  }
-
-    fun getItem(position: Int): ViewHolderItem = currentList[position]
 
     fun updateItems(items: List<ViewHolderItem>?) {
         listDiffer.submitList(items)
