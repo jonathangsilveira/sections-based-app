@@ -16,6 +16,7 @@ class ItemAdapter(
         AdapterListUpdateCallback(this),
         AsyncDifferConfig.Builder(itemDiffer).build()
     )
+    private var itemForViewTypeLookUp: ViewHolderItem? = null
 
     val currentList: List<ViewHolderItem> get() = listDiffer.currentList
 
@@ -36,7 +37,15 @@ class ItemAdapter(
     }
 
     private fun getItemOrThrow(viewType: Int): ViewHolderItem {
-        return currentList.find { it.viewType() == viewType } ?: throw NotImplementedError()
+        itemForViewTypeLookUp?.let {
+            if (it.viewType() == viewType) {
+                return it
+            }
+        }
+        val item =
+            currentList.find { it.viewType() == viewType } ?: throw NotImplementedError()
+        itemForViewTypeLookUp = item
+        return item
     }
 
     override fun add(item: ViewHolderItem) {
