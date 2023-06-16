@@ -4,7 +4,6 @@ import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 
 class ItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-    fun bindTo(item: ViewHolderItem, position: Int, onItemEvent: OnItemEvent) {
-        item.bind(itemView, position, onItemEvent)
-    }
+    var item: ViewHolderItem? = null
+    fun canRecycleItemView(): Boolean = item?.isRecyclable() ?: false
 }

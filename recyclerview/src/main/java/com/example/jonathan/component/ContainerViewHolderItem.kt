@@ -4,7 +4,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
 
 abstract class ContainerViewHolderItem<VB : ViewBinding>
-    : BindingViewHolderItem<VB>(), ViewHolderItemContainer {
+    : BindableViewHolderItem<VB>(), ViewHolderItemContainer {
     private val adapter: ItemAdapter = ItemAdapter()
     private var placeholder: ViewHolderItem? = null
 
