@@ -4,7 +4,7 @@ import android.view.View
 import androidx.core.view.isGone
 import coil.load
 import coil.size.Scale
-import com.example.jonathan.component.BindingViewHolderItem
+import com.example.jonathan.component.BindableViewHolderItem
 import com.example.jonathan.component.OnItemEvent
 import com.example.jonathan.domain.model.properties.Header
 import com.example.jonathan.sectionsapp.R
@@ -12,7 +12,7 @@ import com.example.jonathan.sectionsapp.databinding.HeaderItemBinding
 
 class HeaderItem(
     private val header: Header
-) : BindingViewHolderItem<HeaderItemBinding>() {
+) : BindableViewHolderItem<HeaderItemBinding>() {
     override fun initViewBinding(itemView: View): HeaderItemBinding {
         return HeaderItemBinding.bind(itemView)
     }
@@ -23,6 +23,11 @@ class HeaderItem(
             bindSubtitle(binding)
             bindCover(binding)
         }
+    }
+
+    override fun unbind(binding: HeaderItemBinding) = with(binding.headerItemCoverImage) {
+        isGone = true
+        setImageDrawable(null)
     }
 
     override fun viewType(): Int = R.layout.header_item

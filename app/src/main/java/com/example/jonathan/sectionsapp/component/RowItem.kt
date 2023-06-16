@@ -2,7 +2,7 @@ package com.example.jonathan.sectionsapp.component
 
 import android.view.View
 import androidx.annotation.DrawableRes
-import com.example.jonathan.component.BindingViewHolderItem
+import com.example.jonathan.component.BindableViewHolderItem
 import com.example.jonathan.component.OnItemEvent
 import com.example.jonathan.sectionsapp.R
 import com.example.jonathan.sectionsapp.databinding.RowItemBinding
@@ -12,7 +12,7 @@ class RowItem(
     private val title: String,
     private val subtitle: String,
     @DrawableRes private val trailingIconResId: Int,
-) : BindingViewHolderItem<RowItemBinding>() {
+) : BindableViewHolderItem<RowItemBinding>() {
     override fun initViewBinding(itemView: View): RowItemBinding {
         return RowItemBinding.bind(itemView)
     }

@@ -7,8 +7,8 @@ import java.util.UUID
 abstract class BindableViewHolderItem<VB : ViewBinding> : ViewHolderItem {
     override val id: String = UUID.randomUUID().toString()
     override fun isRecyclable(): Boolean = true
-    override fun bind(itemView: View, position: Int) {
-        bind(initViewBinding(itemView), position)
+    override fun bind(itemView: View, position: Int, onItemEvent: OnItemEvent) {
+        bind(initViewBinding(itemView), position, onItemEvent)
     }
 
     override fun unbind(itemView: View) {
@@ -16,6 +16,6 @@ abstract class BindableViewHolderItem<VB : ViewBinding> : ViewHolderItem {
     }
 
     abstract fun initViewBinding(itemView: View): VB
-    abstract fun bind(binding: VB, position: Int)
+    abstract fun bind(binding: VB, position: Int, onItemEvent: OnItemEvent)
     open fun unbind(binding: VB) = Unit
 }

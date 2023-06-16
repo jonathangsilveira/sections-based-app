@@ -4,7 +4,7 @@ import android.view.View
 import androidx.core.view.isGone
 import coil.load
 import coil.size.Scale
-import com.example.jonathan.component.BindingViewHolderItem
+import com.example.jonathan.component.BindableViewHolderItem
 import com.example.jonathan.component.OnItemEvent
 import com.example.jonathan.domain.model.item.AlbumItem
 import com.example.jonathan.sectionsapp.R
@@ -12,7 +12,7 @@ import com.example.jonathan.sectionsapp.databinding.AlbumItemBinding
 
 class AlbumItem(
     private val album: AlbumItem
-) : BindingViewHolderItem<AlbumItemBinding>() {
+) : BindableViewHolderItem<AlbumItemBinding>() {
     override fun initViewBinding(itemView: View): AlbumItemBinding {
         return AlbumItemBinding.bind(itemView)
     }

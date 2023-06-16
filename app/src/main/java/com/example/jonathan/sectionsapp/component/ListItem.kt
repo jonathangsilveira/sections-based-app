@@ -30,4 +30,8 @@ class ListItem(
             setAdapterTo(this)
         }
     }
+
+    override fun unbind(binding: VerticalListItemBinding) = with(binding.verticalList) {
+        removeItemDecoration(itemDecoration)
+    }
 }

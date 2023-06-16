@@ -22,7 +22,6 @@ class GridItem(
 
     override fun bind(binding: GridItemBinding, position: Int, onItemEvent: OnItemEvent) {
         with(binding.gridItems) {
-            removeItemDecoration(itemDecorator)
             addItemDecoration(itemDecorator)
             layoutManager = GridLayoutManager(
                 context,
@@ -32,5 +31,9 @@ class GridItem(
             )
             setAdapterTo(this)
         }
+    }
+
+    override fun unbind(binding: GridItemBinding) = with(binding.gridItems) {
+        removeItemDecoration(itemDecorator)
     }
 }

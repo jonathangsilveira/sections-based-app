@@ -19,11 +19,14 @@ class CarouselItem(
 
     override fun bind(binding: CarouselItemBinding, position: Int, onItemEvent: OnItemEvent) {
         with(binding.carouselItems) {
-            removeItemDecoration(itemDecoration)
             addItemDecoration(itemDecoration)
             setHorizontalLayoutManager(false)
             setOnItemEventListener(onItemEvent)
             setAdapterTo(this)
         }
+    }
+
+    override fun unbind(binding: CarouselItemBinding) = with(binding.carouselItems) {
+        removeItemDecoration(itemDecoration)
     }
 }
