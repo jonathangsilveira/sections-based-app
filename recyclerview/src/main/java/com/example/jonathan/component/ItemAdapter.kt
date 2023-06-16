@@ -4,13 +4,24 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes
+import androidx.recyclerview.widget.AdapterListUpdateCallback
+import androidx.recyclerview.widget.AsyncDifferConfig
+import androidx.recyclerview.widget.AsyncListDiffer
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 
 
 class ItemAdapter(
     var onActionItem: OnItemEvent = {}
 ) : RecyclerView.Adapter<ItemViewHolder>(), ViewHolderItemContainer {
-    private val items: MutableList<ViewHolderItem> = mutableListOf()
+    private val itemDiffer: DiffUtil.ItemCallback<ViewHolderItem> = ViewHolderItemDiffer()
+    private val listDiffer: AsyncListDiffer<ViewHolderItem> = AsyncListDiffer(
+        AdapterListUpdateCallback(this),
+        AsyncDifferConfig.Builder(itemDiffer).build()
+    )
+    private var itemForViewTypeLookUp: ViewHolderItem? = null
+
+    private val currentList: List<ViewHolderItem> get() = listDiffer.currentList
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
         val item = getItemOrThrow(viewType)
@@ -19,7 +30,7 @@ class ItemAdapter(
     }
 
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
-        val item = items[position]
+        val item = getItem(position)
         item.bind(holder.itemView, position)
         holder.item = item
     }
@@ -32,49 +43,74 @@ class ItemAdapter(
         with(holder) { item?.unbind(itemView) }
     }
 
-    override fun getItemCount(): Int = items.size
+    override fun getItemCount(): Int = currentList.size
 
     override fun getItemViewType(position: Int): Int {
-        return items[position].viewType()
+        return getItem(position).viewType()
     }
 
     override fun add(item: ViewHolderItem) {
-        this.items.add(item)
-        notifyItemInserted(this.items.lastIndex)
+        updateCurrentList {
+            add(item)
+            updateItems(this)
+        }
     }
 
     override fun addAll(items: List<ViewHolderItem>) {
-        this.items.addAll(items)
-        val insertedCount = itemCount
-        notifyItemRangeInserted(0, insertedCount)
+        updateCurrentList {
+            addAll(items)
+            updateItems(this)
+        }
     }
 
     override fun remove(item: ViewHolderItem) {
-        val position = this.items.indexOf(item)
+        val position = currentList.indexOf(item)
         removeAt(position)
     }
 
     override fun removeAt(position: Int) {
-        this.items.removeAt(position)
-        notifyItemRemoved(position)
+        updateCurrentList {
+            removeAt(position)
+            updateItems(this)
+        }
     }
 
     override fun clear() {
-        val removedCount = itemCount
-        this.items.clear()
-        notifyItemRangeRemoved(0, removedCount)
+        updateItems(listOf())
     }
 
-    override fun isEmpty(): Boolean = this.items.isEmpty()
+    override fun isEmpty(): Boolean = currentList.isEmpty()
 
-    override fun contains(item: ViewHolderItem): Boolean = this.items.contains(item)
+    override fun contains(item: ViewHolderItem): Boolean = currentList.contains(item)
 
-    private fun getItemOrThrow(viewType: Int): ViewHolderItem {
-        return items.find { it.viewType() == viewType } ?: throw NotImplementedError()
+    fun updateItems(items: List<ViewHolderItem>?) {
+        listDiffer.submitList(items)
     }
 
     private fun inflateLayout(parent: ViewGroup, @LayoutRes layoutResId: Int): View {
         val inflater = LayoutInflater.from(parent.context)
         return inflater.inflate(layoutResId, parent, false)
+    }
+
+    private fun updateCurrentList(
+        block: MutableList<ViewHolderItem>.() -> Unit
+    ): List<ViewHolderItem> {
+        val mutableCurrentList = currentList.toMutableList()
+        mutableCurrentList.apply(block)
+        return mutableCurrentList
+    }
+
+    private fun getItem(position: Int): ViewHolderItem = currentList[position]
+
+    private fun getItemOrThrow(viewType: Int): ViewHolderItem {
+        itemForViewTypeLookUp?.let {
+            if (it.viewType() == viewType) {
+                return it
+            }
+        }
+        val item = currentList.find { it.viewType() == viewType }
+            ?: throw NotImplementedError()
+        itemForViewTypeLookUp = item
+        return item
     }
 }
