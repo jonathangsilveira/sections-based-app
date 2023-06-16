@@ -31,7 +31,7 @@ class ItemAdapter(
 
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
         val item = getItem(position)
-        item.bind(holder.itemView, position,)
+        item.bind(holder.itemView, position, onActionItem)
         holder.item = item
     }
 
