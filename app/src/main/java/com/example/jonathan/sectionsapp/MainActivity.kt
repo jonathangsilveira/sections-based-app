@@ -5,14 +5,14 @@ import android.widget.ProgressBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
-import com.example.jonathan.component.ItemListAdapter
+import com.example.jonathan.component.ItemAdapter
 import com.example.jonathan.sectionsapp.decoration.VerticalItemDecorator
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : AppCompatActivity() {
     private val viewModel: HomeViewModel by viewModel()
-    private val itemsAdapter: ItemListAdapter by lazy {
-        ItemListAdapter(viewModel::onItemAction)
+    private val itemsAdapter: ItemAdapter by lazy {
+        ItemAdapter(viewModel::onItemAction)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,7 +28,7 @@ class MainActivity : AppCompatActivity() {
         viewModel.stateObserver.observe(this) {
             val progressBar = findViewById<ProgressBar>(R.id.progressBar)
             progressBar.isVisible = it.isLoading
-            itemsAdapter.submitList(it.results)
+            itemsAdapter.updateItems(it.results)
         }
     }
 
