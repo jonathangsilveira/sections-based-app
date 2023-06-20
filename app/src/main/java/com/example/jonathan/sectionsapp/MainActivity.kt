@@ -28,7 +28,7 @@ class MainActivity : AppCompatActivity() {
         viewModel.stateObserver.observe(this) {
             val progressBar = findViewById<ProgressBar>(R.id.progressBar)
             progressBar.isVisible = it.isLoading
-            itemsAdapter.updateItems(it.results)
+            itemsAdapter.submitItems(it.results)
         }
     }
 

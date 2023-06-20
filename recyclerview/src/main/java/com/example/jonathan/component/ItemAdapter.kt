@@ -21,7 +21,8 @@ class ItemAdapter(
     )
     private var itemForViewTypeLookUp: ViewHolderItem? = null
 
-    private val currentList: List<ViewHolderItem> get() = listDiffer.currentList
+    private val currentList: List<ViewHolderItem>
+        get() = listDiffer.currentList
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
         val item = getItemOrThrow(viewType)
@@ -50,16 +51,16 @@ class ItemAdapter(
     }
 
     override fun add(item: ViewHolderItem) {
-        updateCurrentList {
+        updateItems {
             add(item)
-            updateItems(this)
+            submitItems(this)
         }
     }
 
     override fun addAll(items: List<ViewHolderItem>) {
-        updateCurrentList {
+        updateItems {
             addAll(items)
-            updateItems(this)
+            submitItems(this)
         }
     }
 
@@ -69,21 +70,21 @@ class ItemAdapter(
     }
 
     override fun removeAt(position: Int) {
-        updateCurrentList {
+        updateItems {
             removeAt(position)
-            updateItems(this)
+            submitItems(this)
         }
     }
 
     override fun clear() {
-        updateItems(listOf())
+        submitItems(items = null)
     }
 
     override fun isEmpty(): Boolean = currentList.isEmpty()
 
     override fun contains(item: ViewHolderItem): Boolean = currentList.contains(item)
 
-    fun updateItems(items: List<ViewHolderItem>?) {
+    fun submitItems(items: List<ViewHolderItem>?) {
         listDiffer.submitList(items)
     }
 
@@ -92,7 +93,7 @@ class ItemAdapter(
         return inflater.inflate(layoutResId, parent, false)
     }
 
-    private fun updateCurrentList(
+    private fun updateItems(
         block: MutableList<ViewHolderItem>.() -> Unit
     ): List<ViewHolderItem> {
         val mutableCurrentList = currentList.toMutableList()
@@ -108,8 +109,9 @@ class ItemAdapter(
                 return it
             }
         }
-        val item = currentList.find { it.viewType() == viewType }
-            ?: throw NotImplementedError()
+        val item = currentList.find {
+            it.viewType() == viewType
+        } ?: throw NotImplementedError()
         itemForViewTypeLookUp = item
         return item
     }
