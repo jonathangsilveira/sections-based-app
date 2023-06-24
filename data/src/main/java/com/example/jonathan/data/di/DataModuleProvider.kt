@@ -17,16 +17,21 @@ import kotlinx.serialization.modules.polymorphic
 import kotlinx.serialization.modules.subclass
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.create
+import java.util.logging.Level
 
 private const val REMOTE_BASE_URL = "https://parseapi.back4app.com/parse/functions/"
 
 val dataModule = module {
     single {
+        val loggingInterceptor = HttpLoggingInterceptor()
+        loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY)
         OkHttpClient.Builder()
             .addInterceptor(Back4AppInterceptor())
+            .addInterceptor(loggingInterceptor)
             .build()
     }
 
