@@ -6,6 +6,7 @@ import com.example.jonathan.domain.model.item.SectionItem
 import com.example.jonathan.domain.model.properties.ItemType
 import com.example.jonathan.domain.repository.HomeRepository
 import com.example.jonathan.sectionsapp.HomeViewModel
+import com.example.jonathan.sectionsapp.component.HomeCommandReceiver
 import com.example.jonathan.sectionsapp.domain.mapper.AlbumMapper
 import com.example.jonathan.sectionsapp.domain.mapper.HeaderMapper
 import com.example.jonathan.sectionsapp.domain.mapper.RecentlyPlayedMapper
@@ -31,7 +32,7 @@ val homeModule = module {
             itemMapper = mapOf(
                 ItemType.RECENTLY_PLAYED to RecentlyPlayedMapper(),
                 ItemType.ALBUM to AlbumMapper()
-            ) as Map<ItemType, Mapper<SectionItem, ViewHolderItem?>>
+            ) as Map<ItemType, Mapper<SectionItem, ViewHolderItem<HomeCommandReceiver>?>>
         )
     }
 }

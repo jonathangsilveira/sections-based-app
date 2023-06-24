@@ -1,14 +1,13 @@
 package com.example.jonathan.sectionsapp
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.jonathan.component.Command
 import com.example.jonathan.component.ViewHolderItem
-import com.example.jonathan.component.ViewHolderItemEvent
 import com.example.jonathan.domain.request.HomeRequest
-import com.example.jonathan.sectionsapp.component.HomeItemEvent
+import com.example.jonathan.sectionsapp.component.HomeCommandReceiver
 import com.example.jonathan.sectionsapp.domain.usecase.GetHomeUseCase
 import kotlinx.coroutines.launch
 
@@ -17,8 +16,13 @@ internal class HomeViewModel(
 ) : ViewModel() {
 
     private val _stateObserver = MutableLiveData(HomeState())
-
     val stateObserver: LiveData<HomeState> get() = _stateObserver
+
+    private val commandReceiver = object : HomeCommandReceiver {
+        override fun navigateToDetails(id: Long) {
+            println("Command to navigate to details has been received!")
+        }
+    }
 
     fun refresh() {
         viewModelScope.launch {
@@ -39,7 +43,7 @@ internal class HomeViewModel(
         }
     }
 
-    private fun onSuccess(components: List<ViewHolderItem>) {
+    private fun onSuccess(components: List<ViewHolderItem<HomeCommandReceiver>>) {
         updateState { currentState ->
             currentState.copy(
                 isLoading = false,
@@ -66,13 +70,7 @@ internal class HomeViewModel(
         }
     }
 
-    fun onItemAction(action: ViewHolderItemEvent) {
-        if (action is HomeItemEvent) {
-            when (action) {
-                HomeItemEvent.ItemClicked -> Log.d("HomeViewModel", "Click event")
-                HomeItemEvent.ItemLongClicked -> Log.d("HomeViewModel", "Long click event")
-                HomeItemEvent.RemoveItemClicked -> Log.d("HomeViewModel", "Remove click event")
-            }
-        }
+    fun processCommand(command: Command<HomeCommandReceiver>) {
+        command.execute(commandReceiver)
     }
 }

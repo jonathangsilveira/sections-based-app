@@ -6,13 +6,14 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.example.jonathan.component.ItemAdapter
+import com.example.jonathan.sectionsapp.component.HomeCommandReceiver
 import com.example.jonathan.sectionsapp.decoration.VerticalItemDecorator
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : AppCompatActivity() {
     private val viewModel: HomeViewModel by viewModel()
-    private val itemsAdapter: ItemAdapter by lazy {
-        ItemAdapter(viewModel::onItemAction)
+    private val itemsAdapter: ItemAdapter<HomeCommandReceiver> by lazy {
+        ItemAdapter(viewModel::processCommand)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
