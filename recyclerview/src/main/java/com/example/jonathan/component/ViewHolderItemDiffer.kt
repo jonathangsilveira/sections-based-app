@@ -2,14 +2,14 @@ package com.example.jonathan.component
 
 import androidx.recyclerview.widget.DiffUtil
 
-class ViewHolderItemDiffer : DiffUtil.ItemCallback<ViewHolderItem>() {
+class ViewHolderItemDiffer<CR : CommandReceiver> : DiffUtil.ItemCallback<ViewHolderItem<CR>>() {
     override fun areItemsTheSame(
-        oldItem: ViewHolderItem,
-        newItem: ViewHolderItem
+        oldItem: ViewHolderItem<CR>,
+        newItem: ViewHolderItem<CR>
     ): Boolean = oldItem == newItem
 
     override fun areContentsTheSame(
-        oldItem: ViewHolderItem,
-        newItem: ViewHolderItem
+        oldItem: ViewHolderItem<CR>,
+        newItem: ViewHolderItem<CR>
     ): Boolean = oldItem.id == newItem.id
 }

@@ -3,22 +3,22 @@ package com.example.jonathan.component
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
 
-abstract class ContainerViewHolderItem<VB : ViewBinding>
-    : BindableViewHolderItem<VB>(), ViewHolderItemContainer {
-    private val adapter: ItemAdapter = ItemAdapter()
-    private var placeholder: ViewHolderItem? = null
+abstract class ContainerViewHolderItem<VB : ViewBinding, CR : CommandReceiver>
+    : BindableViewHolderItem<VB, CR>(), ViewHolderItemContainer<CR> {
+    private val adapter: ItemAdapter<CR> = ItemAdapter()
+    private var placeholder: ViewHolderItem<CR>? = null
 
-    override fun add(item: ViewHolderItem) {
+    override fun add(item: ViewHolderItem<CR>) {
         if (isShowingPlaceholder()) removePlaceholder()
         this.adapter.add(item)
     }
 
-    override fun addAll(items: List<ViewHolderItem>) {
+    override fun addAll(items: List<ViewHolderItem<CR>>) {
         if (isShowingPlaceholder()) removePlaceholder()
         this.adapter.addAll(items)
     }
 
-    override fun remove(item: ViewHolderItem) {
+    override fun remove(item: ViewHolderItem<CR>) {
         this.adapter.remove(item)
         updateEmptyState()
     }
@@ -35,19 +35,19 @@ abstract class ContainerViewHolderItem<VB : ViewBinding>
 
     override fun isEmpty(): Boolean = isEmpty() || isShowingPlaceholder()
 
-    override fun contains(item: ViewHolderItem): Boolean =
+    override fun contains(item: ViewHolderItem<CR>): Boolean =
         this.adapter.contains(item)
 
-    fun setPlaceholder(placeholder: ViewHolderItem) {
+    fun setPlaceholder(placeholder: ViewHolderItem<CR>) {
         this.placeholder = placeholder
-    }
-
-    fun setOnItemEventListener(onItemEvent: OnItemEvent) {
-        this.adapter.onActionItem = onItemEvent
     }
 
     fun setAdapterTo(recyclerView: RecyclerView) {
         recyclerView.adapter = this.adapter
+    }
+
+    fun setOnCommandChangedListener(action: (Command<CR>) -> Unit) {
+        this.adapter.onCommandChanged = action
     }
 
     private fun updateEmptyState() {

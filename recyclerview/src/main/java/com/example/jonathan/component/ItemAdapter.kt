@@ -11,36 +11,36 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 
 
-class ItemAdapter(
-    var onActionItem: OnItemEvent = {}
-) : RecyclerView.Adapter<ItemViewHolder>(), ViewHolderItemContainer {
-    private val itemDiffer: DiffUtil.ItemCallback<ViewHolderItem> = ViewHolderItemDiffer()
-    private val listDiffer: AsyncListDiffer<ViewHolderItem> = AsyncListDiffer(
+class ItemAdapter<CR : CommandReceiver>(
+    var onCommandChanged: (Command<CR>) -> Unit = {}
+) : RecyclerView.Adapter<ItemViewHolder<CR>>(), ViewHolderItemContainer<CR> {
+    private val itemDiffer: DiffUtil.ItemCallback<ViewHolderItem<CR>> = ViewHolderItemDiffer()
+    private val listDiffer: AsyncListDiffer<ViewHolderItem<CR>> = AsyncListDiffer(
         AdapterListUpdateCallback(this),
         AsyncDifferConfig.Builder(itemDiffer).build()
     )
-    private var itemForViewTypeLookUp: ViewHolderItem? = null
+    private var itemForViewTypeLookUp: ViewHolderItem<CR>? = null
 
-    private val currentList: List<ViewHolderItem>
+    private val currentList: List<ViewHolderItem<CR>>
         get() = listDiffer.currentList
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder<CR> {
         val item = getItemOrThrow(viewType)
         val itemView = inflateLayout(parent, item.viewType())
         return ItemViewHolder(itemView)
     }
 
-    override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ItemViewHolder<CR>, position: Int) {
         val item = getItem(position)
-        item.bind(holder.itemView, position, onActionItem)
+        item.bind(holder.itemView, position, onCommandChanged)
         holder.item = item
     }
 
     override fun onFailedToRecycleView(
-        holder: ItemViewHolder
+        holder: ItemViewHolder<CR>
     ): Boolean = holder.canRecycleItemView()
 
-    override fun onViewRecycled(holder: ItemViewHolder) {
+    override fun onViewRecycled(holder: ItemViewHolder<CR>) {
         with(holder) { item?.unbind(itemView) }
     }
 
@@ -50,21 +50,21 @@ class ItemAdapter(
         return getItem(position).viewType()
     }
 
-    override fun add(item: ViewHolderItem) {
+    override fun add(item: ViewHolderItem<CR>) {
         updateItems {
             add(item)
             submitItems(this)
         }
     }
 
-    override fun addAll(items: List<ViewHolderItem>) {
+    override fun addAll(items: List<ViewHolderItem<CR>>) {
         updateItems {
             addAll(items)
             submitItems(this)
         }
     }
 
-    override fun remove(item: ViewHolderItem) {
+    override fun remove(item: ViewHolderItem<CR>) {
         val position = currentList.indexOf(item)
         removeAt(position)
     }
@@ -82,9 +82,9 @@ class ItemAdapter(
 
     override fun isEmpty(): Boolean = currentList.isEmpty()
 
-    override fun contains(item: ViewHolderItem): Boolean = currentList.contains(item)
+    override fun contains(item: ViewHolderItem<CR>): Boolean = currentList.contains(item)
 
-    fun submitItems(items: List<ViewHolderItem>?) {
+    fun submitItems(items: List<ViewHolderItem<CR>>?) {
         listDiffer.submitList(items)
     }
 
@@ -94,16 +94,16 @@ class ItemAdapter(
     }
 
     private fun updateItems(
-        block: MutableList<ViewHolderItem>.() -> Unit
-    ): List<ViewHolderItem> {
+        block: MutableList<ViewHolderItem<CR>>.() -> Unit
+    ): List<ViewHolderItem<CR>> {
         val mutableCurrentList = currentList.toMutableList()
         mutableCurrentList.apply(block)
         return mutableCurrentList
     }
 
-    private fun getItem(position: Int): ViewHolderItem = currentList[position]
+    private fun getItem(position: Int): ViewHolderItem<CR> = currentList[position]
 
-    private fun getItemOrThrow(viewType: Int): ViewHolderItem {
+    private fun getItemOrThrow(viewType: Int): ViewHolderItem<CR> {
         itemForViewTypeLookUp?.let {
             if (it.viewType() == viewType) {
                 return it

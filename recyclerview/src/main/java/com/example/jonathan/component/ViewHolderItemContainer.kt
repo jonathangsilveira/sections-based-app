@@ -1,11 +1,11 @@
 package com.example.jonathan.component
 
-interface ViewHolderItemContainer {
-    fun add(item: ViewHolderItem)
-    fun addAll(items: List<ViewHolderItem>)
-    fun remove(item: ViewHolderItem)
+interface ViewHolderItemContainer<CR: CommandReceiver> {
+    fun add(item: ViewHolderItem<CR>)
+    fun addAll(items: List<ViewHolderItem<CR>>)
+    fun remove(item: ViewHolderItem<CR>)
     fun removeAt(position: Int)
     fun clear()
     fun isEmpty(): Boolean
-    fun contains(item: ViewHolderItem): Boolean
+    fun contains(item: ViewHolderItem<CR>): Boolean
 }
